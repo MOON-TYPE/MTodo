@@ -1,16 +1,15 @@
 ﻿//                                  ┌∩┐(◣_◢)┌∩┐
 //                                                                              \\
-// MTodoData.cs (00/00/0000)													\\
+// MTodoData.cs (12/01/2017)													\\
 // Autor: Antonio Mateo (Moon Pincho) 									        \\
-// Descripcion:																	\\
-// Fecha Mod:		00/00/0000													\\
-// Ultima Mod:																	\\
+// Descripcion:	Data de MTodo								    				\\
+// Fecha Mod:		12/01/2017													\\
+// Ultima Mod:	Version Inicial													\\
 //******************************************************************************\\
 
 #region Librerias
 using UnityEngine;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 #endregion
@@ -18,7 +17,7 @@ using System.Linq;
 namespace MoonPincho.MTodo
 {
     /// <summary>
-    /// <para></para>
+    /// <para>Data de MTodo	</para>
     /// </summary>
     [Serializable]
     public class MTodoData : ScriptableObject
@@ -31,11 +30,7 @@ namespace MoonPincho.MTodo
         /// <summary>
         /// <para>Categorias de MTodo</para>
         /// </summary>
-        public List<string> Categorias = new List<string>()
-        {
-            "Todas las Categorias",
-            "BUG"
-        };
+        public List<string> Categorias = new List<string>(){ "Todas las Categorias", "BUG" }; // // Categorias de MTodo
         #endregion
 
         #region API
