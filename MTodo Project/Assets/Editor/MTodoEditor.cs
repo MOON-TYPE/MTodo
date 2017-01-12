@@ -1,20 +1,27 @@
 ﻿//                                  ┌∩┐(◣_◢)┌∩┐
 //                                                                              \\
-// MTodoEditor.cs (00/00/0000)													\\
+// MTodoEditor.cs (12/01/1991)													\\
 // Autor: Antonio Mateo (Moon Pincho) 									        \\
-// Descripcion:																	\\
-// Fecha Mod:		00/00/0000													\\
-// Ultima Mod:																	\\
+// Descripcion:	Editor de MTodo													\
+// Fecha Mod:		12/01/1991													\\
+// Ultima Mod:	Version Inicial													\\
 //******************************************************************************\\
 
 #region Librerias
 using UnityEngine;
+using UnityEditor;
 using System.Collections;
 using System.Collections.Generic;
 #endregion
 
-public class MTodoEditor : MonoBehaviour 
+namespace MoonPincho.MTodo
 {
+    /// <summary>
+    /// <para>Editor de MTodo</para>
+    /// </summary>
+    public class MTodoEditor : EditorWindow
+    {
 
 
+    }
 }
