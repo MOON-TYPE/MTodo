@@ -63,6 +63,19 @@ namespace MoonPincho.MTodo
         /// <para>Observador de MTodo</para>
         /// </summary>
         private FileSystemWatcher observador;                                           // Observador de MTodo
+        /// <summary>
+        /// <para>Categorias</para>
+        /// </summary>
+        private string[] Categorias                                                     // Categorias
+        {
+            get
+            {
+                if (data != null && data.Categorias.Count > 0)
+                    return data.Categorias.ToArray();
+                else
+                    return new string[] { "TODO", "BUG" };
+            }
+        }
         #endregion
 
 
@@ -109,8 +122,6 @@ namespace MoonPincho.MTodo
             observador.EnableRaisingEvents = true;
             observador.IncludeSubdirectories = true;
         }
-
-
         #endregion
 
         #region GUI
@@ -161,35 +172,62 @@ namespace MoonPincho.MTodo
             }
         }
 
-        private void EscanearArchivos(string rutaArchivo)
+        /// <summary>
+        /// <para>Escanea un archivo</para>
+        /// </summary>
+        /// <param name="rutaArchivo">Ruta del archivo</param>
+        private void EscanearArchivo(string rutaArchivo)// Escanea un archivo
         {
+            var archivo = new FileInfo(rutaArchivo);
+
             // Existe el archivo
+            if (archivo.Exists == false)
+                return;
+
+            var tickets = new List<clsMTodoTickets>();
+            data.Tickets.RemoveAll(e => e.Archivo == rutaArchivo);
 
             // Parse Extension
+            var parser = new clsMtodoParser(rutaArchivo, Categorias);
 
             // Except
+            tickets.AddRange(parser.Parse());
+            var temp = tickets.Except(data.Tickets);
+            data.Tickets.AddRange(temp);
+        }
+
+        /// <summary>
+        /// <para>Escanea todos los archivos</para>
+        /// </summary>
+        private void EscanearTodosLosArchivos()// Escanea todos los archivos
+        {
+            RefrescarArchivos();
+            foreach (var archivo in archivos.Where(archivo => archivo.Exists))
+            {
+                EscanearArchivo(archivo.FullName);
+            }
         }
         #endregion
 
         #region Eventos Handles
         private void Observador_Created(object obj, FileSystemEventArgs e)
         {
-            // TODO Escaneo de archivos
+            EditorApplication.delayCall += () => EscanearArchivo(e.FullPath);
         }
 
         private void Observador_Renamed(object obj, RenamedEventArgs e)
         {
-            throw new System.NotImplementedException();
+            EditorApplication.delayCall += () => EscanearArchivo(e.FullPath);
         }
 
         private void Observador_Deleted(object obj, FileSystemEventArgs e)
         {
-            throw new System.NotImplementedException();
+            EditorApplication.delayCall += () => data.Tickets.RemoveAll(en => en.Archivo == e.FullPath);
         }
 
         private void Observador_Changed(object obj, FileSystemEventArgs e)
         {
-            throw new System.NotImplementedException();
+            EditorApplication.delayCall += () => EscanearArchivo(e.FullPath);
         }
         #endregion
     }
