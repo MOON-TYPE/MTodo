@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Name: MTodoData
   m_EditorClassIdentifier: 
   Categorias:
-  - Todas las Categorias
+  - TODO
   - BUG

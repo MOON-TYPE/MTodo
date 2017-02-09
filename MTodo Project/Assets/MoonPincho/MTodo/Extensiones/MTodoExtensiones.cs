@@ -10,6 +10,7 @@
 #region Librerias
 using UnityEngine;
 using UnityEditor;
+using System;
 using System.IO;
 #endregion
 
@@ -77,5 +78,71 @@ namespace MoonPincho.MTodo.Extensiones
             return temp ?? CrearData<T>(ruta);
         }
         #endregion
+
+#if UNITY_EDITOR
+        #region Layout
+        public class VerticalBlock : IDisposable
+        {
+            public VerticalBlock(params GUILayoutOption[] opciones)
+            {
+                GUILayout.BeginVertical(opciones);
+            }
+
+            public VerticalBlock(GUIStyle style, params GUILayoutOption[] opciones)
+            {
+                GUILayout.BeginVertical(style, opciones);
+            }
+
+            public void Dispose()
+            {
+                GUILayout.EndVertical();
+            }
+        }
+
+        public class ScrollviewBlock : IDisposable
+        {
+            public ScrollviewBlock(ref Vector2 scrollPos, params GUILayoutOption[] opciones)
+            {
+                scrollPos = GUILayout.BeginScrollView(scrollPos, opciones);
+            }
+
+            public void Dispose()
+            {
+                GUILayout.EndScrollView();
+            }
+        }
+
+        public class HorizontalBlock : IDisposable
+        {
+            public HorizontalBlock(params GUILayoutOption[] opciones)
+            {
+                GUILayout.BeginHorizontal(opciones);
+            }
+
+            public HorizontalBlock(GUIStyle style, params GUILayoutOption[] opciones)
+            {
+                GUILayout.BeginHorizontal(style, opciones);
+            }
+
+            public void Dispose()
+            {
+                GUILayout.EndHorizontal();
+            }
+        }
+
+        public class ColoredBlock : System.IDisposable
+        {
+            public ColoredBlock(Color color)
+            {
+                GUI.color = color;
+            }
+
+            public void Dispose()
+            {
+                GUI.color = Color.white;
+            }
+        }
+        #endregion
+#endif
     }
 }

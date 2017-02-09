@@ -30,7 +30,7 @@ namespace MoonPincho.MTodo
         /// <summary>
         /// <para>Categorias de MTodo</para>
         /// </summary>
-        public List<string> Categorias = new List<string>(){ "Todas las Categorias", "BUG" }; // // Categorias de MTodo
+        public List<string> Categorias = new List<string>(){ "TODO", "BUG" }; // // Categorias de MTodo
         #endregion
 
         #region API
