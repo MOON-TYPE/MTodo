@@ -76,15 +76,24 @@ namespace MoonPincho.MTodo
                     return new string[] { "TODO", "BUG" };
             }
         }
-        private Vector2 sidebarScroll;
-        private Vector2 mainAreaScroll;
+        /// <summary>
+        /// <para>Scroll del sidebar</para>
+        /// </summary>
+        private Vector2 sidebarScroll;                                                  // Scroll del sidebar
+        /// <summary>
+        /// <para>Scroll del area central</para>
+        /// </summary>
+        private Vector2 mainAreaScroll;                                                 // Scroll del area central
+        /// <summary>
+        /// <para>Nombre de la nueva categoria</para>
+        /// </summary>
+        private string nuevaCategoria = "";                                             // Nombre de la nueva categoria
         private float SidebarWidth
         {
             get { return position.width / 3f; }
         }
-        private string nuevaCategoria = "";
-        #endregion
 
+        #endregion
 
         #region Inicializadores
         /// <summary>
@@ -152,6 +161,8 @@ namespace MoonPincho.MTodo
                 MainArea();
             }
 
+            ProcesadorDelInput();
+
             EditorUtility.SetDirty(data);
         }
 
@@ -162,6 +173,8 @@ namespace MoonPincho.MTodo
                 GUILayout.Label("MToDo");
                 if (GUILayout.Button("Escanear", EditorStyles.toolbarButton))
                     EscanearTodosLosArchivos();
+
+                //EditorGUILayout.Slider(0.5f, 0, 1);
                 GUILayout.FlexibleSpace();
                 BuscaString = BuscarCampo(BuscaString, GUILayout.Width(250));
             }
@@ -298,6 +311,27 @@ namespace MoonPincho.MTodo
                 }
             }
         }
+
+        /// <summary>
+        /// <para>Procesa el input del mouse</para>
+        /// </summary>
+        private void ProcesadorDelInput()// Procesa el input del mouse
+        {
+            if (Event.current.type == EventType.MouseDown)
+            {
+                if (Event.current.button == 0)
+                {
+                    // FIX Click Izquierdo
+                }
+
+                if (Event.current.button == 1)
+                {
+                    ClickMouseDerecho();
+                }
+
+            }
+
+        }
         #endregion
 
         #region Funcionalidad
@@ -389,6 +423,34 @@ namespace MoonPincho.MTodo
                 Repaint();
             };
         }
+
+        /// <summary>
+        /// <para>Click Derecho con el mouse</para>
+        /// </summary>
+        private void ClickMouseDerecho()// Click Derecho con el mouse
+        {
+            GenericMenu menu = new GenericMenu();
+
+            //menu.AddSeparator("");
+            menu.AddItem(new GUIContent("GitHub"), false, SubMenuCallBack, TODOMenuItem.GitHub);
+
+            menu.ShowAsContext();
+        }
+
+        /// <summary>
+        /// <para>Llamadas desde el submenu</para>
+        /// </summary>
+        /// <param name="obj"></param>
+        private void SubMenuCallBack(object obj)// Llamadas desde el submenu
+        {
+            TODOMenuItem item = (TODOMenuItem)obj;
+            switch (item)
+            {
+                case TODOMenuItem.GitHub:
+                    Application.OpenURL("https://github.com/lPinchol/MTodo");
+                    break;
+            }
+        }
         #endregion
 
         #region Eventos Handles
@@ -413,9 +475,13 @@ namespace MoonPincho.MTodo
         }
         #endregion
 
-        // TODO Test
-        // BUG Corregir
-        //BUG Corregi 2
-        // BUGCorregir 3
+    }
+
+    /// <summary>
+    /// <para>Enum del contenido del menu</para>
+    /// </summary>
+    public enum TODOMenuItem
+    {
+        GitHub,
     }
 }

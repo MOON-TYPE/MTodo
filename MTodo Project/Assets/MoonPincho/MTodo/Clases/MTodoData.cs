@@ -3,8 +3,8 @@
 // MTodoData.cs (12/01/2017)													\\
 // Autor: Antonio Mateo (Moon Pincho) 									        \\
 // Descripcion:	Data de MTodo								    				\\
-// Fecha Mod:		12/01/2017													\\
-// Ultima Mod:	Version Inicial													\\
+// Fecha Mod:		09/02/2017													\\
+// Ultima Mod:	Cambios en las categorias										\\
 //******************************************************************************\\
 
 #region Librerias
