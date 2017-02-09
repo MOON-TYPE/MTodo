@@ -1,7 +1,7 @@
 # MTodo
 Herramienta sencilla para hacer un seguimiento del codigo en Unity3D
 
-![preview]()
+![preview](https://github.com/lPinchol/MTodo/blob/master/Res/previ.png?raw=true)
 
 Como se usa
 ---
@@ -10,7 +10,8 @@ Por ejemplo, supongamos que tienes una categoria de BUG.
 
 En la linea de tu codigo donde se encuentra ese bug, pondria :
 
-> // <Categoria> <Mensaje>
+> // < Categoria > < Mensaje >
+
 > // BUG Aqui hay un bug.
 
 De este modo, tendras en un sitio todos los mensajes que vallas dejando, siempre y cuando uses primero la categoria.
