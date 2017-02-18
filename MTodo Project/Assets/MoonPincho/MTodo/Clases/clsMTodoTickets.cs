@@ -16,6 +16,7 @@ namespace MoonPincho.MTodo
     /// <summary>
     /// <para>Clase de los tickets de MTodo</para>
     /// </summary>
+    [System.Serializable]
     public class clsMTodoTickets
     {
         #region Variables
