@@ -82,6 +82,51 @@ namespace MoonPincho.MTodo.Extensiones
         }
         #endregion
 
+        #region Path
+        /// <summary>
+        /// <para>Convertir ruta global a relativa</para>
+        /// </summary>
+        /// <param name="path">Ruta</param>
+        /// <returns></returns>
+        public static string GlobalPathARelativa(string path)
+        {
+            if (path.StartsWith(Application.dataPath))
+                return "Assets" + path.Substring(Application.dataPath.Length);
+            else
+                throw new ArgumentException("Ruta incorrecta. La ruta no contiene Application.datapath");
+        }
+
+        /// <summary>
+        /// <para>Convertir ruta relativa a global</para>
+        /// </summary>
+        /// <param name="path">Ruta</param>
+        /// <returns></returns>
+        public static string RelativaPathAGlobal(string path)
+        {
+            return Path.Combine(Application.dataPath, path);
+        }
+
+        /// <summary>
+        /// <para>Convertir ruta de unix a Windows</para>
+        /// </summary>
+        /// <param name="path">Ruta</param>
+        /// <returns></returns>
+        public static string UnixAWindowsPath(string path)
+        {
+            return path.Replace("/", "\\");
+        }
+
+        /// <summary>
+        /// <para>Convertir ruta de windows a unix</para>
+        /// </summary>
+        /// <param name="path">Ruta</param>
+        /// <returns></returns>
+        public static string WindowsAUnixPath(string path)
+        {
+            return path.Replace("\\", "/");
+        }
+        #endregion
+
 #if UNITY_EDITOR
         #region Layout
         public class VerticalBlock : IDisposable

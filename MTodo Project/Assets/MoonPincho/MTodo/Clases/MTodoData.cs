@@ -3,8 +3,8 @@
 // MTodoData.cs (12/01/2017)													\\
 // Autor: Antonio Mateo (Moon Pincho) 									        \\
 // Descripcion:	Data de MTodo								    				\\
-// Fecha Mod:		09/02/2017													\\
-// Ultima Mod:	Cambios en las categorias										\\
+// Fecha Mod:		18/02/2017													\\
+// Ultima Mod:	Incorporado variables de ajustes								\\
 //******************************************************************************\\
 
 #region Librerias
@@ -30,7 +30,15 @@ namespace MoonPincho.MTodo
         /// <summary>
         /// <para>Categorias de MTodo</para>
         /// </summary>
-        public List<string> Categorias = new List<string>(){ "TODO", "BUG" }; // // Categorias de MTodo
+        public List<string> Categorias = new List<string>(){ "TODO", "BUG" };               // Categorias de MTodo
+        /// <summary>
+        /// <para>Auto escanear activado</para>
+        /// </summary>
+        public bool AutoEscaneoMTodo;                                                       // Auto escanear activado
+        /// <summary>
+        /// <para>Ruta de data</para>
+        /// </summary>
+        public string RutaDataMTodo = "";                                                   // Ruta de data
         #endregion
 
         #region API
@@ -98,6 +106,17 @@ namespace MoonPincho.MTodo
                 // Quitamos la categoria dada
                 Categorias.RemoveAt(index);
             }
+        }
+
+        /// <summary>
+        /// <para>Guarda los datos de MTodo</para>
+        /// </summary>
+        /// <param name="esca">Valor de AutoEscaneo</param>
+        /// <param name="rut">Valor de Ruta</param>
+        public void Guardado(bool esca,string rut)// Guarda los datos de MTodo
+        {
+            AutoEscaneoMTodo = esca;
+            RutaDataMTodo = rut;
         }
         #endregion
 
