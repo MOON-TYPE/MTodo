@@ -11,13 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 440ef0a678975ba4cbb62d9aced23bb9, type: 3}
   m_Name: MTodoData
   m_EditorClassIdentifier: 
-  Tickets:
-  - Texto: " Click Izquierdo\r"
-    Nota: 
-    Categoria: FIX
-    Archivo: G:\Moon\User\GitHub\MTodo\MTodo Project\Assets\MoonPincho\MTodo\Editor\MTodoEditor.cs
-    Linea: 324
-    PathAMostrar: Assets/MoonPincho/MTodo/Editor/MTodoEditor.cs(324)
+  Tickets: []
   Categorias:
   - TODO
   - BUG
