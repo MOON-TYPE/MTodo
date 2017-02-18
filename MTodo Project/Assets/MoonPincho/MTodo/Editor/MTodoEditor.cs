@@ -319,10 +319,7 @@ namespace MoonPincho.MTodo
         {
             if (Event.current.type == EventType.MouseDown)
             {
-                if (Event.current.button == 0)
-                {
-                    // FIX Click Izquierdo
-                }
+                if (Event.current.button == 0) {}
 
                 if (Event.current.button == 1)
                 {
