@@ -1,4 +1,4 @@
-﻿//                                  ┌∩┐(◣_◢)┌∩┐
+//                                  ┌∩┐(◣_◢)┌∩┐
 //                                                                              \\
 // MTodoData.cs (12/01/2017)													\\
 // Autor: Antonio Mateo (Moon Pincho) 									        \\
@@ -39,13 +39,21 @@ namespace MoonPincho.MTodo
         /// <para>Ruta de data</para>
         /// </summary>
         public string RutaDataMTodo = "";                                                   // Ruta de data
-        #endregion
+		/// <summary>
+		/// <para>Version actual de MTodo que se usa actualmente.</para>
+		/// </summary>
+		public string versionActual = "1.1.0";												// Version actual de Mtodo que se usa actualmente
+		/// <summary>
+		/// <para>Version online de MTodo.</para>
+		/// </summary>
+		public string versionTop = "";														// Version online de MTodo
+		#endregion
 
-        #region API
-        /// <summary>
-        /// <para>Obtiene el conteo de los tickets</para>
-        /// </summary>
-        public int TicketsCount// Obtiene el conteo de los tickets
+		#region API
+		/// <summary>
+		/// <para>Obtiene el conteo de los tickets</para>
+		/// </summary>
+		public int TicketsCount// Obtiene el conteo de los tickets
         {
             get { return Tickets.Count; }
         }
