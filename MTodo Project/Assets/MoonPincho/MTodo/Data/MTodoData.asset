@@ -11,7 +11,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 440ef0a678975ba4cbb62d9aced23bb9, type: 3}
   m_Name: MTodoData
   m_EditorClassIdentifier: 
-  Tickets: []
+  Tickets:
+  - Texto: " Test Editor\r"
+    Nota: 
+    Categoria: TODO
+    Archivo: G:\Moon\User\GitHub\MTodo\MTodo Project\Assets\MoonPincho\MTodo\Editor\MTodoEditor.cs
+    Linea: 26
+    PathAMostrar: Assets/MoonPincho/MTodo/Editor/MTodoEditor.cs(26)
   Categorias:
   - TODO
   - BUG

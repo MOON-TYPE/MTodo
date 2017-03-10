@@ -3,8 +3,8 @@
 // MTodoEditor.cs (12/01/2017)													\\
 // Autor: Antonio Mateo (Moon Pincho) 									        \\
 // Descripcion:	Editor de MTodo													\
-// Fecha Mod:		08/02/2017													\\
-// Ultima Mod:	Interfaz grafica												\\
+// Fecha Mod:		10/03/2017													\\
+// Ultima Mod:	Implementado control de versiones								\\
 //******************************************************************************\\
 
 #region Librerias
@@ -21,8 +21,11 @@ namespace MoonPincho.MTodo
     /// <summary>
     /// <para>Editor de MTodo</para>
     /// </summary>
+	[ExecuteInEditMode]
     public class MTodoEditor : EditorWindow
     {
+		// TODO Test Editor
+
         #region Variables Privadas
         /// <summary>
         /// <para>Archivos de MTodo</para>
@@ -92,14 +95,17 @@ namespace MoonPincho.MTodo
         {
             get { return position.width / 3f; }
         }
+		/// <summary>
+		/// <para>Temp actualizador.</para>
+		/// </summary>
+		private int updates = 0;														// Temp actualizador
+		#endregion
 
-        #endregion
-
-        #region Inicializadores
-        /// <summary>
-        /// <para>Inicializar el editor</para>
-        /// </summary>
-        [MenuItem("Moon Pincho/MTodo")]
+		#region Inicializadores
+		/// <summary>
+		/// <para>Inicializar el editor</para>
+		/// </summary>
+		[MenuItem("Moon Pincho/MTodo")]
         public static void Init()//Inicializar el editor
         {
             Texture icono = AssetDatabase.LoadAssetAtPath<Texture>("Assets/MoonPincho/MTodo/Icon/MTodoIcon.png");
@@ -137,7 +143,10 @@ namespace MoonPincho.MTodo
 
             observador.EnableRaisingEvents = true;
             observador.IncludeSubdirectories = true;
-        }
+
+			// Actualizador del editor
+			EditorApplication.update = Actualizador;
+		}
         #endregion
 
         #region GUI
@@ -329,14 +338,26 @@ namespace MoonPincho.MTodo
             }
 
         }
-        #endregion
+		#endregion
 
-        #region Funcionalidad
-        /// <summary>
-        /// <para>Busca en el campo de las categorias</para>
-        /// </summary>
-        /// <param name="index">ID de la categoria</param>
-        private void CategoriaCampo(int index)// Busca en el campo de las categorias
+		#region Funcionalidad
+		/// <summary>
+		/// <para>Actualizador del Editor.</para>
+		/// </summary>
+		private void Actualizador()// Actualizador del Editor
+		{
+			updates++;
+			if (updates > 200)
+			{
+				updates = 0;
+			}
+		}
+
+		/// <summary>
+		/// <para>Busca en el campo de las categorias</para>
+		/// </summary>
+		/// <param name="index">ID de la categoria</param>
+		private void CategoriaCampo(int index)// Busca en el campo de las categorias
         {
             Event e = Event.current;
             var cat = index == -1 ? "Todas las Categorias" : data.Categorias[index];
@@ -448,6 +469,8 @@ namespace MoonPincho.MTodo
                     break;
             }
         }
+
+
         #endregion
 
         #region Eventos Handles
