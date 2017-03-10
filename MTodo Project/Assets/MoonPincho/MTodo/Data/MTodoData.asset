@@ -36,5 +36,5 @@ MonoBehaviour:
   - FIX
   AutoEscaneoMTodo: 1
   RutaDataMTodo: Assets/MoonPincho/MTodo/Data/MTodoData.asset
-  versionActual: 1.1.0
+  versionActual: 1.5.0
   versionTop: 1.1.0
