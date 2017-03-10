@@ -26,6 +26,9 @@ namespace MoonPincho.MTodo
     public class MTodoEditor : EditorWindow
     {
 		// TODO Test Editor
+		// TODO 2
+		// FIX 3
+		// NOTA SO
 
         #region Variables Privadas
         /// <summary>
@@ -195,8 +198,22 @@ namespace MoonPincho.MTodo
                 if (GUILayout.Button("Escanear", EditorStyles.toolbarButton))
                     EscanearTodosLosArchivos();
 
-                //EditorGUILayout.Slider(0.5f, 0, 1);
-                GUILayout.FlexibleSpace();
+				GUI.backgroundColor = Color.red;
+
+				if (mtodoDesactualizado == true)
+				{
+					if (GUILayout.Button("Actualizacion disponible ==> " + data.versionTop, EditorStyles.toolbarButton))
+						Application.OpenURL("https://github.com/MOON-TYPE/MTodo");
+				}
+				else
+				{
+					EditorGUILayout.Slider(data.GetCountDeCategorias(catActual), 0, data.Tickets.Count);
+				}
+
+				GUI.backgroundColor = Color.white;
+
+				
+				GUILayout.FlexibleSpace();
                 BuscaString = BuscarCampo(BuscaString, GUILayout.Width(250));
             }
         }
@@ -503,6 +520,7 @@ namespace MoonPincho.MTodo
 				}
 
 				if (data.versionActual != data.versionTop) mtodoDesactualizado = true;
+				if (data.versionActual == data.versionTop) mtodoDesactualizado = false;
 
 				yield return new WaitForSeconds(2f);
 			}
