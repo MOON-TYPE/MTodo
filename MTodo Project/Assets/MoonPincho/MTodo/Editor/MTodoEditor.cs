@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using MoonPincho.MTodo.Extensiones;
+using System.Collections;
 #endregion
 
 namespace MoonPincho.MTodo
@@ -98,7 +99,15 @@ namespace MoonPincho.MTodo
 		/// <summary>
 		/// <para>Temp actualizador.</para>
 		/// </summary>
-		private int updates = 0;														// Temp actualizador
+		private int updates = 0;                                                        // Temp actualizador
+		/// <summary>
+		/// <para>Url del txt de version.</para>
+		/// </summary>
+		private string urlVerionTop = "https://raw.githubusercontent.com/MOON-TYPE/MTodo/master/Res/Version/version.txt";// Url del txt de version
+		/// <summary>
+		/// <para>Si esta desactualizado MTodo.</para>
+		/// </summary>
+		private bool mtodoDesactualizado = false;										// Si esta desactualizado MTodo
 		#endregion
 
 		#region Inicializadores
@@ -146,6 +155,9 @@ namespace MoonPincho.MTodo
 
 			// Actualizador del editor
 			EditorApplication.update = Actualizador;
+
+			// Comprueba la ultima version disponible de MTodo
+			this.StartCoroutine(ComprobarVersion());
 		}
         #endregion
 
@@ -470,11 +482,35 @@ namespace MoonPincho.MTodo
             }
         }
 
+		/// <summary>
+		/// <para>Comprueba la version actual y la version mas alta de MTodo.</para>
+		/// </summary>
+		/// <returns></returns>
+		private IEnumerator ComprobarVersion()// Comprueba la version actual y la version mas alta de MTodo
+		{
+			while (true)
+			{
+				var www = new WWW(urlVerionTop);
+				yield return www;
 
-        #endregion
+				if (www.error != null)
+				{
+					Debug.LogError("Error .. " + www.error);
+				}
+				else
+				{
+					data.versionTop = www.text;
+				}
 
-        #region Eventos Handles
-        private void Observador_Created(object obj, FileSystemEventArgs e)
+				if (data.versionActual != data.versionTop) mtodoDesactualizado = true;
+
+				yield return new WaitForSeconds(2f);
+			}
+		}
+		#endregion
+
+		#region Eventos Handles
+		private void Observador_Created(object obj, FileSystemEventArgs e)
         {
             EditorApplication.delayCall += () => EscanearArchivo(e.FullPath);
         }
