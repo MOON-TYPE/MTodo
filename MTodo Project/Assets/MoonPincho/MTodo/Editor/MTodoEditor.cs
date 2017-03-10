@@ -30,6 +30,8 @@ namespace MoonPincho.MTodo
 		// FIX 3
 		// NOTA SO
 
+		// NOTA Crear la tag 1.5 para github
+
         #region Variables Privadas
         /// <summary>
         /// <para>Archivos de MTodo</para>
@@ -190,6 +192,9 @@ namespace MoonPincho.MTodo
             EditorUtility.SetDirty(data);
         }
 
+		/// <summary>
+		/// <para>Toolbar</para>
+		/// </summary>
         private void Toolbar()
         {
             using (new MTodoExtensiones.HorizontalBlock(EditorStyles.toolbar))
@@ -218,6 +223,9 @@ namespace MoonPincho.MTodo
             }
         }
 
+		/// <summary>
+		/// <para>Sidebar</para>
+		/// </summary>
         private void Sidebar()
         {
             using (new MTodoExtensiones.VerticalBlock(GUI.skin.box, GUILayout.Width(SidebarWidth), GUILayout.ExpandHeight(true)))
@@ -232,6 +240,9 @@ namespace MoonPincho.MTodo
             }
         }
 
+		/// <summary>
+		/// <para>Area</para>
+		/// </summary>
         private void MainArea()
         {
             using (new MTodoExtensiones.VerticalBlock(GUI.skin.box, GUILayout.ExpandWidth(true), GUILayout.ExpandHeight(true)))
@@ -378,6 +389,10 @@ namespace MoonPincho.MTodo
 			updates++;
 			if (updates > 200)
 			{
+				if (data.AutoEscaneoMTodo == true)
+				{
+					EscanearTodosLosArchivos();
+				}
 				updates = 0;
 			}
 		}
