@@ -3,6 +3,14 @@
 # MTodo
 Herramienta sencilla para hacer un seguimiento del codigo en Unity3D
 
+---
+
+> Unity3D 5.5+
+
+> VS 2017
+
+---
+
 ![preview](https://github.com/lPinchol/MTodo/blob/master/Res/previ.png?raw=true)
 
 ### Como se usa
