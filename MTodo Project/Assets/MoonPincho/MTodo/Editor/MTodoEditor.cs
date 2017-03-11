@@ -30,8 +30,6 @@ namespace MoonPincho.MTodo
 		// FIX 3
 		// NOTA SO
 
-		// NOTA Crear la tag 1.5 para github
-
         #region Variables Privadas
         /// <summary>
         /// <para>Archivos de MTodo</para>
@@ -163,6 +161,11 @@ namespace MoonPincho.MTodo
 
 			// Comprueba la ultima version disponible de MTodo
 			this.StartCoroutine(ComprobarVersion());
+
+			if (data.versionActual != data.versionTop) mtodoDesactualizado = true;
+			if (data.versionActual == data.versionTop) mtodoDesactualizado = false;
+
+			Debug.Log(data.versionActual +"|"+ data.versionTop);
 		}
         #endregion
 
@@ -207,8 +210,8 @@ namespace MoonPincho.MTodo
 
 				if (mtodoDesactualizado == true)
 				{
-					if (GUILayout.Button("Actualizacion disponible ==> " + data.versionTop, EditorStyles.toolbarButton))
-						Application.OpenURL("https://github.com/MOON-TYPE/MTodo");
+					if (GUILayout.Button("Actualizar a " + data.versionTop, EditorStyles.toolbarButton))
+						Application.OpenURL("https://github.com/MOON-TYPE/MTodo/releases");
 				}
 				else
 				{
@@ -216,6 +219,8 @@ namespace MoonPincho.MTodo
 				}
 
 				GUI.backgroundColor = Color.white;
+
+				Debug.Log(mtodoDesactualizado);
 
 				
 				GUILayout.FlexibleSpace();
@@ -387,8 +392,9 @@ namespace MoonPincho.MTodo
 		private void Actualizador()// Actualizador del Editor
 		{
 			updates++;
-			if (updates > 200)
+			if (updates > 2)
 			{
+				RefrescarData();
 				if (data.AutoEscaneoMTodo == true)
 				{
 					EscanearTodosLosArchivos();
@@ -536,6 +542,8 @@ namespace MoonPincho.MTodo
 
 				if (data.versionActual != data.versionTop) mtodoDesactualizado = true;
 				if (data.versionActual == data.versionTop) mtodoDesactualizado = false;
+
+				Repaint();
 
 				yield return new WaitForSeconds(2f);
 			}

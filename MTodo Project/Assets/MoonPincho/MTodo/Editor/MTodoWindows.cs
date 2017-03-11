@@ -61,7 +61,9 @@ namespace MoonPincho.MTodo
                     dataPath = MTodoExtensiones.GlobalPathARelativa(EditorUtility.SaveFilePanel("", "Assets", "MTodoData", "asset"));
             }
 
-            if (GUI.changed)
+			EditorGUILayout.HelpBox("Version MTodo<" + data.versionActual + ">", MessageType.Info);
+
+			if (GUI.changed)
                 GuardarAjustes();
 
         }
