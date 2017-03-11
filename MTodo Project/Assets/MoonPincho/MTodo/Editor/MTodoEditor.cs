@@ -164,8 +164,6 @@ namespace MoonPincho.MTodo
 
 			if (data.versionActual != data.versionTop) mtodoDesactualizado = true;
 			if (data.versionActual == data.versionTop) mtodoDesactualizado = false;
-
-			Debug.Log(data.versionActual +"|"+ data.versionTop);
 		}
         #endregion
 
@@ -219,9 +217,6 @@ namespace MoonPincho.MTodo
 				}
 
 				GUI.backgroundColor = Color.white;
-
-				Debug.Log(mtodoDesactualizado);
-
 				
 				GUILayout.FlexibleSpace();
                 BuscaString = BuscarCampo(BuscaString, GUILayout.Width(250));
