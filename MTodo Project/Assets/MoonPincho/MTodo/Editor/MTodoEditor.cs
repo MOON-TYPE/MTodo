@@ -2,9 +2,9 @@
 //                                                                              \\
 // MTodoEditor.cs (12/01/2017)													\\
 // Autor: Antonio Mateo (Moon Pincho) 									        \\
-// Descripcion:	Editor de MTodo													\
-// Fecha Mod:		10/03/2017													\\
-// Ultima Mod:	Implementado control de versiones								\\
+// Descripcion:		Editor de MTodo												\\
+// Fecha Mod:		16/03/2017													\\
+// Ultima Mod:		Fix problema con la datapath								\\
 //******************************************************************************\\
 
 #region Librerias
@@ -25,11 +25,6 @@ namespace MoonPincho.MTodo
 	[ExecuteInEditMode]
     public class MTodoEditor : EditorWindow
     {
-		// TODO Test Editor
-		// TODO 2
-		// FIX 3
-		// NOTA SO
-
         #region Variables Privadas
         /// <summary>
         /// <para>Archivos de MTodo</para>
@@ -137,11 +132,21 @@ namespace MoonPincho.MTodo
             if (EditorApplication.isPlayingOrWillChangePlaymode == true)
                 return;
 
+			// Obtener datapath
+			rutaData = MTodoWindows.dataPath;
+
             // Refrescar archivos
             RefrescarArchivos();
 
             // Cargar data
             data = MTodoExtensiones.CrearDataPersistente<MTodoData>(rutaData);
+
+			// Si la ruta esta vacia, asignarle una
+			if (data.RutaDataMTodo == string.Empty || data.RutaDataMTodo == null)
+			{
+				data.RutaDataMTodo = rutaData;
+				MTodoWindows.dataPath = rutaData;
+			}
 
             // Refrescar Data
             RefrescarData();
@@ -494,7 +499,9 @@ namespace MoonPincho.MTodo
         {
             GenericMenu menu = new GenericMenu();
 
-            //menu.AddSeparator("");
+			menu.AddItem(new GUIContent("AutoEscaneo"), false, SubMenuCallBack, TODOMenuItem.AutoSave);
+
+			menu.AddSeparator("");
             menu.AddItem(new GUIContent("GitHub"), false, SubMenuCallBack, TODOMenuItem.GitHub);
 
             menu.ShowAsContext();
@@ -512,7 +519,20 @@ namespace MoonPincho.MTodo
                 case TODOMenuItem.GitHub:
                     Application.OpenURL("https://github.com/lPinchol/MTodo");
                     break;
-            }
+
+				case TODOMenuItem.AutoSave:
+					if (MTodoWindows.autoEscaneo == true)
+					{
+						MTodoWindows.autoEscaneo = false;
+						Debug.Log("[AutoEscaneo] -> Desactivado");
+					}
+					else
+					{
+						MTodoWindows.autoEscaneo = true;
+						Debug.Log("[AutoEscaneo] -> Activado");
+					}
+					break;
+			}
         }
 
 		/// <summary>
@@ -566,7 +586,6 @@ namespace MoonPincho.MTodo
             EditorApplication.delayCall += () => EscanearArchivo(e.FullPath);
         }
         #endregion
-
     }
 
     /// <summary>
@@ -575,5 +594,6 @@ namespace MoonPincho.MTodo
     public enum TODOMenuItem
     {
         GitHub,
+		AutoSave,
     }
 }

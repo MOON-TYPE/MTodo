@@ -3,8 +3,9 @@
 // MTodoWindows.cs (18/02/2017)													\\
 // Autor: Antonio Mateo (Moon Pincho) 									        \\
 // Descripcion:		Windows de preferencias de MTodo							\\
-// Fecha Mod:		18/02/2017													\\
-// Ultima Mod:		Version Inicial												\\
+// Fecha Mod:		16/03/2017													\\
+// Ultima Mod:		Modificado estado de seguridad de acceso a dataPath			\\
+//					y autoEscaneo												\\
 //******************************************************************************\\
 
 #region Librerias
@@ -20,19 +21,19 @@ namespace MoonPincho.MTodo
     /// </summary>
 	public class MTodoWindows : MonoBehaviour 
 	{
-        #region Variables privadas
+        #region Variables
         /// <summary>
         /// <para>Ajustes cargados actualmente</para>
         /// </summary>
         private static bool ajustesCargados;
-        /// <summary>
-        /// <para>Auto escanear activado</para>
-        /// </summary>
-        private static bool autoEscaneo;
+		/// <summary>
+		/// <para>Auto escanear activado</para>
+		/// </summary>
+		public static bool autoEscaneo;
         /// <summary>
         /// <para>Ruta de data</para>
         /// </summary>
-        private static string dataPath = @"Assets/MoonPincho/MTodo/Data/MTodoData.asset";
+        public static string dataPath = @"Assets/MoonPincho/MTodo/Data/MTodoData.asset";
         /// <summary>
         /// <para>Data de MTodo</para>
         /// </summary>

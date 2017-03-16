@@ -3,8 +3,8 @@
 // MTodoData.cs (12/01/2017)													\\
 // Autor: Antonio Mateo (Moon Pincho) 									        \\
 // Descripcion:	Data de MTodo								    				\\
-// Fecha Mod:		18/02/2017													\\
-// Ultima Mod:	Incorporado variables de ajustes								\\
+// Fecha Mod:		16/03/2017													\\
+// Ultima Mod:	Ajuste de version												\\
 //******************************************************************************\\
 
 #region Librerias
@@ -42,7 +42,7 @@ namespace MoonPincho.MTodo
 		/// <summary>
 		/// <para>Version actual de MTodo que se usa actualmente.</para>
 		/// </summary>
-		public string versionActual = "1.5.0";												// Version actual de Mtodo que se usa actualmente
+		public string versionActual = "1.5.1";												// Version actual de Mtodo que se usa actualmente
 		/// <summary>
 		/// <para>Version online de MTodo.</para>
 		/// </summary>

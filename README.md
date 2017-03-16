@@ -28,6 +28,10 @@ De este modo, tendras en un sitio todos los mensajes que vallas dejando, siempre
 
 Despues solo tienes que ir, dandole click en el mensaje, y se te abrira tu IDE por la linea donde esta.
 
+### Changelog
+
+TODO : Agregar Changelog
+
 ### Licencias
 ---
 EditorCoroutine => Marijn Zwemmer
