@@ -1,4 +1,7 @@
+[![GitHub issues](https://img.shields.io/github/issues/MOON-TYPE/MTodo.svg)](https://github.com/MOON-TYPE/MTodo/issues)
+[![UnityVersion](https://img.shields.io/badge/Unity-5.5.2p4-orange.svg)](https://unity3d.com/es)
 [![Build Status](https://img.shields.io/badge/Trello-Active-brightgreen.svg)](https://trello.com/b/ZPmPLDJ8)
+[![GitHub license](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://raw.githubusercontent.com/MOON-TYPE/MTodo/master/LICENSE)
 
 # MTodo
 Herramienta sencilla para hacer un seguimiento del codigo en Unity3D
@@ -30,9 +33,11 @@ Despues solo tienes que ir, dandole click en el mensaje, y se te abrira tu IDE p
 
 ### Changelog
 
-TODO : Agregar Changelog
+[Releases][1]
 
 ### Licencias
 ---
 EditorCoroutine => Marijn Zwemmer
+
+[1]: https://github.com/MOON-TYPE/MTodo/releases
 
