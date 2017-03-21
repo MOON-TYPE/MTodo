@@ -36,7 +36,7 @@ Despues solo tienes que ir, dandole click en el mensaje, y se te abrira tu IDE p
 
 [Releases][1]
 
-### Licencias
+### Licencias & Atribuciones
 ---
 EditorCoroutine => Marijn Zwemmer
 
