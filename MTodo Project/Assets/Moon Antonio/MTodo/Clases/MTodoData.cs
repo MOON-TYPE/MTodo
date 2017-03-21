@@ -1,10 +1,10 @@
 //                                  ┌∩┐(◣_◢)┌∩┐
 //                                                                              \\
 // MTodoData.cs (12/01/2017)													\\
-// Autor: Antonio Mateo (Moon Pincho) 									        \\
+// Autor: Antonio Mateo (Moon Antonio) 									        \\
 // Descripcion:	Data de MTodo								    				\\
-// Fecha Mod:		16/03/2017													\\
-// Ultima Mod:	Ajuste de version												\\
+// Fecha Mod:		21/03/2017													\\
+// Ultima Mod:	    Cambio en el namespace										\\
 //******************************************************************************\\
 
 #region Librerias
@@ -14,7 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 #endregion
 
-namespace MoonPincho.MTodo
+namespace MoonAntonio.MTodo
 {
     /// <summary>
     /// <para>Data de MTodo	</para>

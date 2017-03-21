@@ -1,10 +1,10 @@
 ﻿//                                  ┌∩┐(◣_◢)┌∩┐
 //																				\\
 // MTodoExtensiones.cs (08/02/2017)												\\
-// Autor: Antonio Mateo (Moon Pincho) 									        \\
+// Autor: Antonio Mateo (Moon Antonio) 									        \\
 // Descripcion:	Extensiones para el editor de MTodo								\\
-// Fecha Mod:		08/02/2017													\\
-// Ultima Mod:		Version inicial												\\
+// Fecha Mod:		21/03/2017													\\
+// Ultima Mod:		Cambio en el namespace										\\
 //******************************************************************************\\
 
 #region Librerias
@@ -14,7 +14,7 @@ using System;
 using System.IO;
 #endregion
 
-namespace MoonPincho.MTodo.Extensiones
+namespace MoonAntonio.MTodo.Extensiones
 {
     /// <summary>
     /// <para>Extensiones para el editor de MTodo</para>

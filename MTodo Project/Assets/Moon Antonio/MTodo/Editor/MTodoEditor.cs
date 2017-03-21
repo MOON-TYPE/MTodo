@@ -1,10 +1,10 @@
 ﻿//                                  ┌∩┐(◣_◢)┌∩┐
 //                                                                              \\
 // MTodoEditor.cs (12/01/2017)													\\
-// Autor: Antonio Mateo (Moon Pincho) 									        \\
+// Autor: Antonio Mateo (Moon Antonio) 									        \\
 // Descripcion:		Editor de MTodo												\\
-// Fecha Mod:		16/03/2017													\\
-// Ultima Mod:		Fix problema con la datapath								\\
+// Fecha Mod:		21/03/2017													\\
+// Ultima Mod:		Cambio en el namespace      								\\
 //******************************************************************************\\
 
 #region Librerias
@@ -13,11 +13,11 @@ using UnityEditor;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using MoonPincho.MTodo.Extensiones;
+using MoonAntonio.MTodo.Extensiones;
 using System.Collections;
 #endregion
 
-namespace MoonPincho.MTodo
+namespace MoonAntonio.MTodo
 {
     /// <summary>
     /// <para>Editor de MTodo</para>
@@ -37,7 +37,7 @@ namespace MoonPincho.MTodo
         /// <summary>
         /// <para>Ruta de MTodo</para>
         /// </summary>
-        private string rutaData = @"Assets/MoonPincho/MTodo/Data/MTodoData.asset";      // Ruta de MTodo
+        private string rutaData = @"Assets/Moon Antonio/MTodo/Data/MTodoData.asset";      // Ruta de MTodo
         /// <summary>
         /// <para>Tickets que seran mostrados</para>
         /// </summary>
@@ -115,7 +115,7 @@ namespace MoonPincho.MTodo
 		[MenuItem("Moon Pincho/MTodo")]
         public static void Init()//Inicializar el editor
         {
-            Texture icono = AssetDatabase.LoadAssetAtPath<Texture>("Assets/MoonPincho/MTodo/Icon/MTodoIcon.png");
+            Texture icono = AssetDatabase.LoadAssetAtPath<Texture>("Assets/Moon Antonio/MTodo/Icon/MTodoIcon.png");
             var window = GetWindow<MTodoEditor>();
             window.minSize = new Vector2(0, 0);
             GUIContent tituloContenido = new GUIContent(" MTodo",icono);

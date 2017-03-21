@@ -1,17 +1,17 @@
 ﻿//                                  ┌∩┐(◣_◢)┌∩┐
 //                                                                              \\
 // MTodoData.cs (12/01/2017)													\\
-// Autor: Antonio Mateo (Moon Pincho) 									        \\
+// Autor: Antonio Mateo (Moon Antonio) 									        \\
 // Descripcion:	Clase de los tickets de MTodo								    \\
-// Fecha Mod:		12/01/2017													\\
-// Ultima Mod:	Version Inicial													\\
+// Fecha Mod:		21/01/2017													\\
+// Ultima Mod:	    Cambio en el namespace										\\
 //******************************************************************************\\
 
 #region Librerias
 using UnityEngine;
 #endregion
 
-namespace MoonPincho.MTodo
+namespace MoonAntonio.MTodo
 {
     /// <summary>
     /// <para>Clase de los tickets de MTodo</para>

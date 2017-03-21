@@ -1,20 +1,19 @@
 ﻿//                                  ┌∩┐(◣_◢)┌∩┐
 //																				\\
 // MTodoWindows.cs (18/02/2017)													\\
-// Autor: Antonio Mateo (Moon Pincho) 									        \\
+// Autor: Antonio Mateo (Moon Antonio) 									        \\
 // Descripcion:		Windows de preferencias de MTodo							\\
-// Fecha Mod:		16/03/2017													\\
-// Ultima Mod:		Modificado estado de seguridad de acceso a dataPath			\\
-//					y autoEscaneo												\\
+// Fecha Mod:		21/03/2017													\\
+// Ultima Mod:		Cambio en el namespace										\\
 //******************************************************************************\\
 
 #region Librerias
 using UnityEngine;
 using UnityEditor;
-using MoonPincho.MTodo.Extensiones;
+using MoonAntonio.MTodo.Extensiones;
 #endregion
 
-namespace MoonPincho.MTodo
+namespace MoonAntonio.MTodo
 {
     /// <summary>
     /// <para>Windows de preferencias de MTodo</para>
@@ -33,7 +32,7 @@ namespace MoonPincho.MTodo
         /// <summary>
         /// <para>Ruta de data</para>
         /// </summary>
-        public static string dataPath = @"Assets/MoonPincho/MTodo/Data/MTodoData.asset";
+        public static string dataPath = @"Assets/Moon Antonio/MTodo/Data/MTodoData.asset";
         /// <summary>
         /// <para>Data de MTodo</para>
         /// </summary>

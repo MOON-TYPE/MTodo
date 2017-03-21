@@ -1,10 +1,10 @@
 ﻿//                                  ┌∩┐(◣_◢)┌∩┐
 //																				\\
 // clsMtodoParser.cs (09/02/2017)												\\
-// Autor: Antonio Mateo (Moon Pincho) 									        \\
+// Autor: Antonio Mateo (Moon Antonio) 									        \\
 // Descripcion:		Clase para analizar 										\\
-// Fecha Mod:		09/02/2017													\\
-// Ultima Mod:		Version Inicial												\\
+// Fecha Mod:		21/03/2017													\\
+// Ultima Mod:		Cambio en el namespace										\\
 //******************************************************************************\\
 
 #region Librerias
@@ -17,7 +17,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 #endregion
 
-namespace MoonPincho.MTodo
+namespace MoonAntonio.MTodo
 {
 	public class clsMtodoParser
 	{
