@@ -112,7 +112,7 @@ namespace MoonAntonio.MTodo
 		/// <summary>
 		/// <para>Inicializar el editor</para>
 		/// </summary>
-		[MenuItem("Moon Pincho/MTodo")]
+		[MenuItem("Moon Antonio/MTodo")]
         public static void Init()//Inicializar el editor
         {
             Texture icono = AssetDatabase.LoadAssetAtPath<Texture>("Assets/Moon Antonio/MTodo/Icon/MTodoIcon.png");
@@ -398,6 +398,8 @@ namespace MoonAntonio.MTodo
 				if (data.AutoEscaneoMTodo == true)
 				{
 					EscanearTodosLosArchivos();
+					// Comprueba la ultima version disponible de MTodo
+					this.StartCoroutine(ComprobarVersion());
 				}
 				updates = 0;
 			}
