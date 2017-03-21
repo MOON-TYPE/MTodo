@@ -16,6 +16,6 @@ MonoBehaviour:
   - TODO
   - BUG
   AutoEscaneoMTodo: 0
-  RutaDataMTodo: 
+  RutaDataMTodo: Assets/Moon Antonio/MTodo/Data/MTodoData.asset
   versionActual: 1.5.1
   versionTop: 
