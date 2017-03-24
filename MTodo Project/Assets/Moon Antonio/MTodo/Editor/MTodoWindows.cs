@@ -64,10 +64,34 @@ namespace MoonAntonio.MTodo
 
             using (new MTodoExtensiones.HorizontalBlock())
             {
-                GUILayout.Label(dataPath, GUILayout.ExpandWidth(true));
-                if (GUILayout.Button("Buscar", EditorStyles.miniButton, GUILayout.ExpandWidth(false)))
-                    dataPath = MTodoExtensiones.GlobalPathARelativa(EditorUtility.SaveFilePanel("", "Assets", "MTodoData", "asset"));
+				using (new MTodoExtensiones.VerticalBlock())
+				{
+					GUILayout.Label("MTodoData  :");
+					if (GUILayout.Button("Buscar", EditorStyles.miniButton, GUILayout.ExpandWidth(false)))
+						dataPath = MTodoExtensiones.GlobalPathARelativa(EditorUtility.SaveFilePanel("", "Assets", "MTodoData", "asset"));
+				}
+
+				using (new MTodoExtensiones.VerticalBlock())
+				{
+					GUILayout.Label(dataPath, GUILayout.ExpandWidth(true));
+				}
+
             }
+
+			using (new MTodoExtensiones.HorizontalBlock())
+			{
+				using (new MTodoExtensiones.VerticalBlock())
+				{
+					GUILayout.Label("MTareaData :");
+					if (GUILayout.Button("Buscar", EditorStyles.miniButton, GUILayout.ExpandWidth(false)))
+						dataPath = MTodoExtensiones.GlobalPathARelativa(EditorUtility.SaveFilePanel("", "Assets", "MTareaData", "asset"));
+				}
+
+				using (new MTodoExtensiones.VerticalBlock())
+				{
+					GUILayout.Label(dataPathTarea, GUILayout.ExpandWidth(true));
+				}
+			}
 
 			EditorGUILayout.HelpBox("Version MTodo<" + data.versionActual + ">", MessageType.Info);
 
@@ -81,22 +105,25 @@ namespace MoonAntonio.MTodo
         /// <summary>
         /// <para>Carga los ajustes de MTodo</para>
         /// </summary>
-        private static void CargarAjustes()
-        {
+        private static void CargarAjustes()// Carga los ajustes de MTodo
+		{
             data = (MTodoData)MTodoExtensiones.CrearDataPersistente<MTodoData>(dataPath);
+			dataTarea = MTodoExtensiones.CrearDataPersistente<MTodoTareaData>(dataPathTarea);
             autoEscaneo = data.AutoEscaneoMTodo;
             dataPath = data.RutaDataMTodo;
+			dataPathTarea = dataTarea.RutaDataMTodoTareas;
         }
 
         /// <summary>
         /// <para>Aplica los ajustes de MTodo</para>
         /// </summary>
-        private static void GuardarAjustes()
-        {
+        private static void GuardarAjustes()// Aplica los ajustes de MTodo
+		{
             data = MTodoExtensiones.CrearDataPersistente<MTodoData>(dataPath);
             data.AutoEscaneoMTodo = autoEscaneo;
             data.RutaDataMTodo = dataPath;
-        }
+			dataTarea = MTodoExtensiones.CrearDataPersistente<MTodoTareaData>(dataPathTarea);
+		}
         #endregion
     }
 }
