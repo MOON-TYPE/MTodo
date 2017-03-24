@@ -84,7 +84,7 @@ namespace MoonAntonio.MTodo
 				{
 					GUILayout.Label("MTareaData :");
 					if (GUILayout.Button("Buscar", EditorStyles.miniButton, GUILayout.ExpandWidth(false)))
-						dataPath = MTodoExtensiones.GlobalPathARelativa(EditorUtility.SaveFilePanel("", "Assets", "MTareaData", "asset"));
+						dataPathTarea = MTodoExtensiones.GlobalPathARelativa(EditorUtility.SaveFilePanel("", "Assets", "MTareaData", "asset"));
 				}
 
 				using (new MTodoExtensiones.VerticalBlock())
