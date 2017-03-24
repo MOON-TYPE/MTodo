@@ -33,14 +33,22 @@ namespace MoonAntonio.MTodo
         /// <para>Ruta de data</para>
         /// </summary>
         public static string dataPath = @"Assets/Moon Antonio/MTodo/Data/MTodoData.asset";
-        /// <summary>
-        /// <para>Data de MTodo</para>
-        /// </summary>
-        private static MTodoData data;
-        #endregion
+		/// <summary>
+		/// <para>Ruta de data</para>
+		/// </summary>
+		public static string dataPathTarea = @"Assets/Moon Antonio/MTodo/Data/MTareaData.asset";
+		/// <summary>
+		/// <para>Data de MTodo</para>
+		/// </summary>
+		private static MTodoData data;
+		/// <summary>
+		/// <para>Data de MTodo</para>
+		/// </summary>
+		private static MTodoTareaData dataTarea;
+		#endregion
 
-        #region Gui
-        [PreferenceItem("MToDo")]
+		#region Gui
+		[PreferenceItem("MToDo")]
         public static void ToDoWindowsGUI()
         {
             if (!ajustesCargados)

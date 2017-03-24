@@ -3,8 +3,8 @@
 // MTodoData.cs (12/01/2017)													\\
 // Autor: Antonio Mateo (Moon Antonio) 									        \\
 // Descripcion:	Data de MTodo								    				\\
-// Fecha Mod:		21/03/2017													\\
-// Ultima Mod:	    Cambio en el namespace										\\
+// Fecha Mod:		24/03/2017													\\
+// Ultima Mod:	    Agregado ToolEstado											\\
 //******************************************************************************\\
 
 #region Librerias
@@ -22,7 +22,11 @@ namespace MoonAntonio.MTodo
     [Serializable]
     public class MTodoData : ScriptableObject
     {
-        #region Variables
+		#region Variables
+		/// <summary>
+		/// <para>Estado de la herramienta seleccionada.</para>
+		/// </summary>
+		public ToolEstado estado = ToolEstado.MTodo;										// Estado de la herramienta seleccionada
         /// <summary>
         /// <para>Tickets de MTodo</para>
         /// </summary>
@@ -129,4 +133,10 @@ namespace MoonAntonio.MTodo
         #endregion
 
     }
+
+	public enum ToolEstado
+	{
+		MTodo,
+		MTarea
+	}
 }
