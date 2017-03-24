@@ -11,6 +11,7 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 #endregion
 
 namespace MoonAntonio.MTodo
@@ -34,6 +35,83 @@ namespace MoonAntonio.MTodo
         /// <para>Ruta de data</para>
         /// </summary>
         public string RutaDataMTodoTareas = "";                                             // Ruta de data
+		#endregion
+
+		#region API
+		/// <summary>
+		/// <para>Obtiene el conteo de las tareas.</para>
+		/// </summary>
+		public int TareasCount// Obtiene el conteo de las tareas
+		{
+			get { return Tareas.Count; }
+		}
+
+		/// <summary>
+		/// <para>Obtiene el conteo de las categorias</para>
+		/// </summary>
+		public int CategoriasCount// Obtiene el conteo de las categorias
+		{
+			get { return Categorias.Count; }
+		}
+
+		/// <summary>
+		/// <para>Obtiene el conteo de las categorias</para>
+		/// </summary>
+		/// <param name="cat">Categoria</param>
+		/// <returns></returns>
+		public int GetCountDeCategorias(int cat)// Obtiene el conteo de las categorias
+		{
+			return cat != -1 ? Tareas.Count(e => e.Categoria == Categorias[cat]) : TareasCount;
+		}
+
+		/// <summary>
+		/// <para>Obtiene la tarea deseada.</para>
+		/// </summary>
+		/// <param name="index">ID de la tarea</param>
+		/// <returns>Ticket</returns>
+		public clsMTodoTareas GetTareaAt(int index)// Obtiene la tarea deseada
+		{
+			return Tareas[index];
+		}
+
+		/// <summary>
+		/// <para>Agrega una categoria nueva.</para>
+		/// </summary>
+		/// <param name="cat">Nombre de la categoria.</param>
+		public void AddCategoria(string cat)// Agrega una categoria nueva
+		{
+			// Si categorias contiene la categoria dad o si esta vacio volvemos
+			if (Categorias.Contains(cat) || string.IsNullOrEmpty(cat))
+			{
+				return;
+			}
+
+			// Sino agregamos la nueva categoria
+			Categorias.Add(cat);
+		}
+
+		/// <summary>
+		/// <para>Quita una categoria</para>
+		/// </summary>
+		/// <param name="index">ID de la categoria.</param>
+		public void RemoveCategoria(int index)// Quita una categoria
+		{
+			// Si las categorias son mayores que el index pasado
+			if (Categorias.Count >= (index + 1))
+			{
+				// Quitamos la categoria dada
+				Categorias.RemoveAt(index);
+			}
+		}
+
+		/// <summary>
+		/// <para>Guarda los datos de las tareas</para>
+		/// </summary>
+		/// <param name="rut">Valor de Ruta</param>
+		public void Guardado(string rut)// Guarda los datos de las tareas
+		{
+			RutaDataMTodoTareas = rut;
+		}
 		#endregion
 	}
 }
