@@ -25,11 +25,31 @@ namespace MoonAntonio.MTodo
 	[ExecuteInEditMode]
     public class MTodoEditor : EditorWindow
     {
-        #region Variables Privadas
-        /// <summary>
-        /// <para>Archivos de MTodo</para>
-        /// </summary>
-        private FileInfo[] archivos;                                                    // Archivos de MTodo
+		#region Variables Privadas
+		#region Core
+		/// <summary>
+		/// <para>Temp actualizador.</para>
+		/// </summary>
+		private int updates = 0;                                                        // Temp actualizador
+		/// <summary>
+		/// <para>Url del txt de version.</para>
+		/// </summary>
+		private string urlVerionTop = "https://raw.githubusercontent.com/MOON-TYPE/MTodo/master/Res/Version/version.txt";// Url del txt de version
+		/// <summary>
+		/// <para>Si esta desactualizado MTodo.</para>
+		/// </summary>
+		private bool mtodoDesactualizado = false;                                       // Si esta desactualizado MTodo
+		/// <summary>
+		/// <para>Estado de la herramienta.</para>
+		/// </summary>
+		private ToolEstado estado = ToolEstado.MTodo;									// Estado de la herramienta
+		#endregion
+
+		#region MTodo
+		/// <summary>
+		/// <para>Archivos de MTodo</para>
+		/// </summary>
+		private FileInfo[] archivos;                                                    // Archivos de MTodo
         /// <summary>
         /// <para>Data de MTodo</para>
         /// </summary>
@@ -37,7 +57,7 @@ namespace MoonAntonio.MTodo
         /// <summary>
         /// <para>Ruta de MTodo</para>
         /// </summary>
-        private string rutaData = @"Assets/Moon Antonio/MTodo/Data/MTodoData.asset";      // Ruta de MTodo
+        private string rutaData = @"Assets/Moon Antonio/MTodo/Data/MTodoData.asset";    // Ruta de MTodo
         /// <summary>
         /// <para>Tickets que seran mostrados</para>
         /// </summary>
@@ -94,18 +114,16 @@ namespace MoonAntonio.MTodo
         {
             get { return position.width / 3f; }
         }
-		/// <summary>
-		/// <para>Temp actualizador.</para>
-		/// </summary>
-		private int updates = 0;                                                        // Temp actualizador
-		/// <summary>
-		/// <para>Url del txt de version.</para>
-		/// </summary>
-		private string urlVerionTop = "https://raw.githubusercontent.com/MOON-TYPE/MTodo/master/Res/Version/version.txt";// Url del txt de version
-		/// <summary>
-		/// <para>Si esta desactualizado MTodo.</para>
-		/// </summary>
-		private bool mtodoDesactualizado = false;										// Si esta desactualizado MTodo
+		#endregion
+
+		#region MTarea
+		// TODO Inicializar las variables necesarias
+		// Data
+		// Ruta
+		// Tareas
+		// Categoria Actual
+		// Categoria
+		#endregion
 		#endregion
 
 		#region Inicializadores
