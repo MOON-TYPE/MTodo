@@ -13,6 +13,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Tareas: []
   Categorias:
-  - Default
-  - Urgente
+  - categorias: []
+    nombre: 
+  - categorias: []
+    nombre: 
   RutaDataMTodoTareas: Assets/Moon Antonio/MTodo/Data/MTareaData.asset
+  TareasCompletadas: []

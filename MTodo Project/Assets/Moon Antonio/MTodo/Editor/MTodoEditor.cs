@@ -3,8 +3,8 @@
 // MTodoEditor.cs (12/01/2017)													\\
 // Autor: Antonio Mateo (Moon Antonio) 									        \\
 // Descripcion:		Editor de MTodo												\\
-// Fecha Mod:		21/03/2017													\\
-// Ultima Mod:		Cambio en el namespace      								\\
+// Fecha Mod:		27/03/2017													\\
+// Ultima Mod:		Add funcionalidad de tareas      							\\
 //******************************************************************************\\
 
 #region Librerias
@@ -133,6 +133,14 @@ namespace MoonAntonio.MTodo
 		/// <para>Nombre de la nueva categoria</para>
 		/// </summary>
 		private string nuevaCategoriaTarea = "";                                        // Nombre de la nueva categoria
+		/// <summary>
+		/// <para>Nombre de la nueva tarea.</para>
+		/// </summary>
+		private string nombreTarea;														// Nombre de la nueva tarea
+		/// <summary>
+		/// <para>Descripcion de la tarea.</para>
+		/// </summary>
+		private string descripTarea;													// Descripcion de la tarea
 		#endregion
 		#endregion
 
@@ -261,19 +269,40 @@ namespace MoonAntonio.MTodo
 		{
 			using (new MTodoExtensiones.HorizontalBlock(EditorStyles.toolbar))
 			{
-				if (GUILayout.Button("MToDo", EditorStyles.toolbarButton))
+				if (estado == ToolEstado.MTodo)
 				{
-					estado = ToolEstado.MTodo;
-					data.estado = ToolEstado.MTodo;
+					GUI.backgroundColor = Color.green;
+					if (GUILayout.Button("MToDo", EditorStyles.toolbarButton))
+					{
+						estado = ToolEstado.MTodo;
+						data.estado = ToolEstado.MTodo;
+					}
+
+					GUI.backgroundColor = Color.red;
+					if (GUILayout.Button("MTarea", EditorStyles.toolbarButton))
+					{
+						estado = ToolEstado.MTarea;
+						data.estado = ToolEstado.MTarea;
+					}
+				}
+				else
+				{
+					GUI.backgroundColor = Color.red;
+					if (GUILayout.Button("MToDo", EditorStyles.toolbarButton))
+					{
+						estado = ToolEstado.MTodo;
+						data.estado = ToolEstado.MTodo;
+					}
+
+					GUI.backgroundColor = Color.green;
+					if (GUILayout.Button("MTarea", EditorStyles.toolbarButton))
+					{
+						estado = ToolEstado.MTarea;
+						data.estado = ToolEstado.MTarea;
+					}
 				}
 
-
-				if (GUILayout.Button("MTarea", EditorStyles.toolbarButton))
-				{
-					estado = ToolEstado.MTarea;
-					data.estado = ToolEstado.MTarea;
-				}
-					
+				GUI.backgroundColor = Color.white;
 
 				if (estado == ToolEstado.MTodo)
 				{
@@ -309,7 +338,8 @@ namespace MoonAntonio.MTodo
 					}
 					else
 					{
-						// TODO Mostrar tareas en total
+						EditorGUILayout.Slider(dataTarea.Tareas.Count,0,dataTarea.Tareas.Count + dataTarea.TareasCompletadas.Count);
+						EditorGUILayout.LabelField((dataTarea.Tareas.Count + dataTarea.TareasCompletadas.Count).ToString());
 					}
 
 					GUI.backgroundColor = Color.white;
@@ -361,11 +391,8 @@ namespace MoonAntonio.MTodo
 			{
 				using (new MTodoExtensiones.ScrollviewBlock(ref sidebarScroll))
 				{
-					CategoriaCampoTarea(-1);
-					for (var i = 0; i < dataTarea.CategoriasCount; i++)
-						CategoriaCampoTarea(i);
+					AddTarea();
 				}
-				AddCategoriaTarea();
 			}
 		}
 
@@ -378,7 +405,14 @@ namespace MoonAntonio.MTodo
 			{
 				using (new MTodoExtensiones.ScrollviewBlock(ref mainAreaScroll))
 				{
-					CampoTarea();
+					if (dataTarea.Tareas.Count <= 0)
+					{
+						EditorGUILayout.LabelField("No hay Tareas pendientes.");
+					}
+					else
+					{
+						CampoTarea();
+					}
 				}
 			}
 		}
@@ -583,9 +617,32 @@ namespace MoonAntonio.MTodo
 		/// <para>Busca en el campo de las categorias</para>
 		/// </summary>
 		/// <param name="index">ID de la categoria</param>
-		private void CategoriaCampoTarea(int index)// Busca en el campo de las categorias
+		private void AddTarea()// Busca en el campo de las categorias
 		{
-			// TODO Campo de las categorias
+			EditorGUILayout.BeginVertical("box");
+
+			EditorGUILayout.LabelField("Nueva Tarea");
+
+			EditorGUILayout.Space();
+
+			EditorGUILayout.LabelField("Nombre");
+			nombreTarea = EditorGUILayout.TextField(nombreTarea);
+
+			EditorGUILayout.Space();
+
+			EditorGUILayout.LabelField("Descripcion");
+			descripTarea = EditorGUILayout.TextArea(descripTarea,GUILayout.Height(100f));
+
+			EditorGUILayout.Space();
+
+			if (GUILayout.Button("+"))
+			{
+				dataTarea.AddTarea(nombreTarea, descripTarea);
+				nombreTarea = "";
+				descripTarea = "";
+			}
+
+			EditorGUILayout.EndVertical();
 		}
 
 		/// <summary>
@@ -689,9 +746,40 @@ namespace MoonAntonio.MTodo
 			}
         }
 
-		private void CampoTarea()
+		/// <summary>
+		/// <para>Campo de las tareas</para>
+		/// </summary>
+		private void CampoTarea()// Campo de las tareas
 		{
-			// TODO GUI de las tareas
+			EditorGUILayout.BeginVertical("Box");
+
+			for (int n = 0; n < dataTarea.TareasCount; n++)
+			{
+				EditorGUILayout.BeginVertical();
+
+				EditorGUILayout.LabelField(dataTarea.Tareas[n].nombre);
+				EditorGUILayout.LabelField(dataTarea.Tareas[n].fechaInicio.ToString());
+
+				EditorGUILayout.EndVertical();
+
+				EditorGUILayout.BeginHorizontal("box");
+
+				EditorGUILayout.LabelField(dataTarea.Tareas[n].descripcion,GUILayout.Width(550f),GUILayout.Height(100f));
+
+				EditorGUILayout.EndHorizontal();
+
+				EditorGUILayout.BeginHorizontal("box");
+				if (GUILayout.Button("Finalizar"))
+				{
+					dataTarea.Tareas[n].Completado();
+					dataTarea.TareasCompletadas.Add(new clsMTodoTareas(dataTarea.Tareas[n].nombre, dataTarea.Tareas[n].descripcion));
+					dataTarea.Tareas.RemoveAt(n);
+				}
+				EditorGUILayout.EndHorizontal();
+
+			}
+
+			EditorGUILayout.EndVertical();
 		}
 
 		/// <summary>

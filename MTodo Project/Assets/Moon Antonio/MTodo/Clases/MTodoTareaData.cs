@@ -35,6 +35,10 @@ namespace MoonAntonio.MTodo
         /// <para>Ruta de data</para>
         /// </summary>
         public string RutaDataMTodoTareas = "";                                             // Ruta de data
+		/// <summary>
+		/// <para>Tareas de MTodo</para>
+		/// </summary>
+		public List<clsMTodoTareas> TareasCompletadas = new List<clsMTodoTareas>();          // Tareas de MTodo
 		#endregion
 
 		#region API
@@ -70,7 +74,17 @@ namespace MoonAntonio.MTodo
 		/// <param name="cat">Nombre de la categoria.</param>
 		public void AddCategoria(string cat)// Agrega una categoria nueva
 		{
-			// TODO Funcionalidad Add Categoria
+			// MTODO Funcionalidad Add Categoria
+		}
+
+		/// <summary>
+		/// <para>Agrega una nueva tarea.</para>
+		/// </summary>
+		/// <param name="nombre">Nombre de la tarea.</param>
+		/// <param name="descripcion">Descripcion de la tarea.</param>
+		public void AddTarea(string nombre, string descripcion)// Agrega una nueva tarea
+		{
+			Tareas.Add(new clsMTodoTareas(nombre, descripcion));
 		}
 
 		/// <summary>

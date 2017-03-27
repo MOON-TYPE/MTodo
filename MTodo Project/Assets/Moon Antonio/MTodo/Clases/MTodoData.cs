@@ -46,7 +46,7 @@ namespace MoonAntonio.MTodo
 		/// <summary>
 		/// <para>Version actual de MTodo que se usa actualmente.</para>
 		/// </summary>
-		public string versionActual = "1.5.2";												// Version actual de Mtodo que se usa actualmente
+		public string versionActual = "2.0.0";												// Version actual de Mtodo que se usa actualmente
 		/// <summary>
 		/// <para>Version online de MTodo.</para>
 		/// </summary>
