@@ -128,7 +128,7 @@ namespace MoonAntonio.MTodo
 		/// <summary>
 		/// <para>Tareas que seran mostrados</para>
 		/// </summary>
-		private clsMTodoTareas[] tareasMostrados;                                       // Tareas que seran mostrados
+		private clsMTodoTareas[] tareasMostradas;                                       // Tareas que seran mostrados
 		/// <summary>
 		/// <para>Categoria actual a mostrar de tareas</para>
 		/// </summary>
@@ -146,6 +146,14 @@ namespace MoonAntonio.MTodo
 					return new string[] { "Default", "Urgente" };
 			}
 		}
+		/// <summary>
+		/// <para>Nombre de la nueva categoria</para>
+		/// </summary>
+		private string nuevaCategoriaTarea = "";                                        // Nombre de la nueva categoria
+
+		private string nuevoTitulo = "";
+
+		private string nuevaDescripcion = "";
 		#endregion
 		#endregion
 
@@ -240,52 +248,103 @@ namespace MoonAntonio.MTodo
 
 			Undo.RecordObject(data, "tododata");
 
-			Toolbar();
-            using (new MTodoExtensiones.HorizontalBlock())
-            {
-                Sidebar();
-                MainArea();
-            }
+			Header();
 
-            ProcesadorDelInput();
+			if (estado == ToolEstado.MTodo)
+			{
+				using (new MTodoExtensiones.HorizontalBlock())
+				{
+					Sidebar();
+					MainArea();
+				}
 
-            EditorUtility.SetDirty(data);
+				ProcesadorDelInput();
+
+				EditorUtility.SetDirty(data);
+			}
+
+			if (estado == ToolEstado.MTarea)
+			{
+				using (new MTodoExtensiones.HorizontalBlock())
+				{
+					SidebarTarea();
+					MainAreaTarea();
+				}
+
+				EditorUtility.SetDirty(dataTarea);
+			}
         }
 
 		/// <summary>
 		/// <para>Toolbar</para>
 		/// </summary>
-        private void Toolbar()
-        {
-            using (new MTodoExtensiones.HorizontalBlock(EditorStyles.toolbar))
-            {
-                GUILayout.Label("MToDo");
-                if (GUILayout.Button("Escanear", EditorStyles.toolbarButton))
-                    EscanearTodosLosArchivos();
-
-				GUI.backgroundColor = Color.red;
-
-				if (mtodoDesactualizado == true)
+		private void Header()
+		{
+			using (new MTodoExtensiones.HorizontalBlock(EditorStyles.toolbar))
+			{
+				if (GUILayout.Button("MToDo", EditorStyles.toolbarButton))
 				{
-					if (GUILayout.Button("Actualizar a " + data.versionTop, EditorStyles.toolbarButton))
-						Application.OpenURL("https://github.com/MOON-TYPE/MTodo/releases");
-				}
-				else
-				{
-					EditorGUILayout.Slider(data.GetCountDeCategorias(catActual), 0, data.Tickets.Count);
+					estado = ToolEstado.MTodo;
+					data.estado = ToolEstado.MTodo;
 				}
 
-				GUI.backgroundColor = Color.white;
-				
-				GUILayout.FlexibleSpace();
-                BuscaString = BuscarCampo(BuscaString, GUILayout.Width(250));
-            }
-        }
 
+				if (GUILayout.Button("MTarea", EditorStyles.toolbarButton))
+				{
+					estado = ToolEstado.MTarea;
+					data.estado = ToolEstado.MTarea;
+				}
+					
+
+				if (estado == ToolEstado.MTodo)
+				{
+					if (GUILayout.Button("Escanear", EditorStyles.toolbarButton))
+						EscanearTodosLosArchivos();
+
+					GUI.backgroundColor = Color.red;
+
+					if (mtodoDesactualizado == true)
+					{
+						if (GUILayout.Button("Actualizar a " + data.versionTop, EditorStyles.toolbarButton))
+							Application.OpenURL("https://github.com/MOON-TYPE/MTodo/releases");
+					}
+					else
+					{
+						EditorGUILayout.Slider(data.GetCountDeCategorias(catActual), 0, data.Tickets.Count);
+					}
+
+					GUI.backgroundColor = Color.white;
+
+					GUILayout.FlexibleSpace();
+					BuscaString = BuscarCampo(BuscaString, GUILayout.Width(250));
+				}
+
+				if (estado == ToolEstado.MTarea)
+				{
+					GUI.backgroundColor = Color.red;
+
+					if (mtodoDesactualizado == true)
+					{
+						if (GUILayout.Button("Actualizar a " + data.versionTop, EditorStyles.toolbarButton))
+							Application.OpenURL("https://github.com/MOON-TYPE/MTodo/releases");
+					}
+					else
+					{
+						EditorGUILayout.Slider(dataTarea.GetCountDeCategorias(catTareaActual), 0, dataTarea.Tareas.Count);
+					}
+
+					GUI.backgroundColor = Color.white;
+
+					GUILayout.FlexibleSpace();
+				}
+			}
+		}
+
+		#region MTodo GUI
 		/// <summary>
 		/// <para>Sidebar</para>
 		/// </summary>
-        private void Sidebar()
+		private void Sidebar()
         {
             using (new MTodoExtensiones.VerticalBlock(GUI.skin.box, GUILayout.Width(SidebarWidth), GUILayout.ExpandHeight(true)))
             {
@@ -311,13 +370,68 @@ namespace MoonAntonio.MTodo
                         TicketsCampo(i);
             }
         }
-        #endregion
+		#endregion
 
-        #region Metodos
-        /// <summary>
-        /// <para>Refrescar los archivos en MTodo del proyecto</para>
-        /// </summary>
-        private void RefrescarArchivos()// Refrescar los archivos en MTodo del proyecto
+		#region MTarea GUI
+		/// <summary>
+		/// <para>Sidebar</para>
+		/// </summary>
+		private void SidebarTarea()
+		{
+			using (new MTodoExtensiones.VerticalBlock(GUI.skin.box, GUILayout.Width(SidebarWidth), GUILayout.ExpandHeight(true)))
+			{
+				using (new MTodoExtensiones.ScrollviewBlock(ref sidebarScroll))
+				{
+					CategoriaCampoTarea(-1);
+					for (var i = 0; i < dataTarea.CategoriasCount; i++)
+						CategoriaCampoTarea(i);
+				}
+				AddCategoriaTarea();
+			}
+		}
+
+		/// <summary>
+		/// <para>Area</para>
+		/// </summary>
+		private void MainAreaTarea()
+		{
+			using (new MTodoExtensiones.VerticalBlock(GUI.skin.box, GUILayout.ExpandWidth(true), GUILayout.ExpandHeight(true)))
+			{
+				EditorGUILayout.BeginHorizontal();
+
+				nuevoTitulo = EditorGUILayout.TextField("Titulo: ",nuevoTitulo);
+				nuevaDescripcion = EditorGUILayout.TextArea(nuevaDescripcion);
+				nuevaCategoriaTarea = EditorGUILayout.TextField("Categoria: ",nuevaCategoriaTarea);
+				if (GUILayout.Button("+"))
+				{
+					dataTarea.Tareas.Add(new clsMTodoTareas(nuevoTitulo, false, nuevaDescripcion, nuevaCategoriaTarea));
+				}
+
+				EditorGUILayout.EndHorizontal();
+
+				using (new MTodoExtensiones.ScrollviewBlock(ref mainAreaScroll))
+				{
+					EditorGUILayout.BeginVertical();
+					for (var i = 0; i < tareasMostradas.Length; i++)
+					{
+						if (tareasMostradas[i].Completado == false)
+						{
+							EditorGUILayout.LabelField(tareasMostradas[i].Titulo);
+						}
+						
+					}
+					EditorGUILayout.EndVertical();
+				}
+			}
+		}
+		#endregion
+		#endregion
+
+		#region Metodos
+		/// <summary>
+		/// <para>Refrescar los archivos en MTodo del proyecto</para>
+		/// </summary>
+		private void RefrescarArchivos()// Refrescar los archivos en MTodo del proyecto
         {
             // Variable del directorio
             var dirAssets = new DirectoryInfo(Application.dataPath);
@@ -367,11 +481,22 @@ namespace MoonAntonio.MTodo
             }
         }
 
-        /// <summary>
-        /// <para>Escanea un archivo</para>
-        /// </summary>
-        /// <param name="rutaArchivo">Ruta del archivo</param>
-        private void EscanearArchivo(string rutaArchivo)// Escanea un archivo
+		/// <summary>
+		/// <para>Refresca los Tareas que se muestran</para>
+		/// </summary>
+		private void RefrescaTareasAMostrar()// Refresca los Tareas que se muestran
+		{
+			if (catTareaActual == -1)
+				tareasMostradas = dataTarea.Tareas.ToArray();
+			else if (catTareaActual >= 0)
+				tareasMostradas = dataTarea.Tareas.Where(e => e.Categoria == dataTarea.Categorias[catTareaActual]).ToArray();
+		}
+
+		/// <summary>
+		/// <para>Escanea un archivo</para>
+		/// </summary>
+		/// <param name="rutaArchivo">Ruta del archivo</param>
+		private void EscanearArchivo(string rutaArchivo)// Escanea un archivo
         {
             var archivo = new FileInfo(rutaArchivo);
 
@@ -420,10 +545,27 @@ namespace MoonAntonio.MTodo
             }
         }
 
-        /// <summary>
-        /// <para>Procesa el input del mouse</para>
-        /// </summary>
-        private void ProcesadorDelInput()// Procesa el input del mouse
+		/// <summary>
+		/// <para>Agrega una nueva categoria</para>
+		/// </summary>
+		private void AddCategoriaTarea()// Agrega una nueva categoria
+		{
+			using (new MTodoExtensiones.HorizontalBlock(EditorStyles.helpBox))
+			{
+				nuevaCategoriaTarea = EditorGUILayout.TextField(nuevaCategoriaTarea);
+				if (GUILayout.Button("+", EditorStyles.miniButton, GUILayout.ExpandWidth(false)))
+				{
+					dataTarea.AddCategoria(nuevaCategoriaTarea);
+					nuevaCategoriaTarea = "";
+					GUI.FocusControl(null);
+				}
+			}
+		}
+
+		/// <summary>
+		/// <para>Procesa el input del mouse</para>
+		/// </summary>
+		private void ProcesadorDelInput()// Procesa el input del mouse
         {
             if (Event.current.type == EventType.MouseDown)
             {
@@ -490,13 +632,44 @@ namespace MoonAntonio.MTodo
                 SetCatActual(index);
         }
 
-        /// <summary>
-        /// <para>Busca en un campo</para>
-        /// </summary>
-        /// <param name="buscarPalabr">Palabra que buscar</param>
-        /// <param name="opciones">Opciones de layout</param>
-        /// <returns>La palabra encontrada</returns>
-        private string BuscarCampo(string buscarPalabr, params GUILayoutOption[] opciones)// Busca en un campo
+		/// <summary>
+		/// <para>Busca en el campo de las categorias</para>
+		/// </summary>
+		/// <param name="index">ID de la categoria</param>
+		private void CategoriaCampoTarea(int index)// Busca en el campo de las categorias
+		{
+			Event e = Event.current;
+			var cat = index == -1 ? "Todas las Categorias" : dataTarea.Categorias[index];
+			using (new MTodoExtensiones.HorizontalBlock(EditorStyles.helpBox))
+			{
+				using (new MTodoExtensiones.ColoredBlock(index == catTareaActual ? Color.green : Color.white))
+				{
+					GUILayout.Label("#" + cat);
+					GUILayout.FlexibleSpace();
+					GUILayout.Label("(" + dataTarea.GetCountDeCategorias(index) + ")");
+				}
+				if (index != -1 && index != 0 && index != 1)
+				{
+					if (GUILayout.Button("x", EditorStyles.miniButton))
+						EditorApplication.delayCall += () =>
+						{
+							dataTarea.RemoveCategoria(index);
+							Repaint();
+						};
+				}
+			}
+			var rect = GUILayoutUtility.GetLastRect();
+			if (e.isMouse && e.type == EventType.MouseDown && rect.Contains(e.mousePosition))
+				SetCatActualTarea(index);
+		}
+
+		/// <summary>
+		/// <para>Busca en un campo</para>
+		/// </summary>
+		/// <param name="buscarPalabr">Palabra que buscar</param>
+		/// <param name="opciones">Opciones de layout</param>
+		/// <returns>La palabra encontrada</returns>
+		private string BuscarCampo(string buscarPalabr, params GUILayoutOption[] opciones)// Busca en un campo
         {
             buscarPalabr = GUILayout.TextField(buscarPalabr, "ToolbarSeachTextField", opciones);
             if (GUILayout.Button("", "ToolbarSeachCancelButton"))
@@ -534,11 +707,11 @@ namespace MoonAntonio.MTodo
                 };
         }
 
-        /// <summary>
-        /// <para>Fija la categoria actual</para>
-        /// </summary>
-        /// <param name="index">ID Categoria</param>
-        private void SetCatActual(int index)// Fija la categoria actual
+		/// <summary>
+		/// <para>Fija la categoria actual</para>
+		/// </summary>
+		/// <param name="index">ID Categoria</param>
+		private void SetCatActual(int index)// Fija la categoria actual
         {
             EditorApplication.delayCall += () =>
             {
@@ -548,10 +721,24 @@ namespace MoonAntonio.MTodo
             };
         }
 
-        /// <summary>
-        /// <para>Click Derecho con el mouse</para>
-        /// </summary>
-        private void ClickMouseDerecho()// Click Derecho con el mouse
+		/// <summary>
+		/// <para>Fija la categoria actual</para>
+		/// </summary>
+		/// <param name="index">ID Categoria</param>
+		private void SetCatActualTarea(int index)// Fija la categoria actual
+		{
+			EditorApplication.delayCall += () =>
+			{
+				catTareaActual = index;
+				RefrescaTareasAMostrar();
+				Repaint();
+			};
+		}
+
+		/// <summary>
+		/// <para>Click Derecho con el mouse</para>
+		/// </summary>
+		private void ClickMouseDerecho()// Click Derecho con el mouse
         {
             GenericMenu menu = new GenericMenu();
 
