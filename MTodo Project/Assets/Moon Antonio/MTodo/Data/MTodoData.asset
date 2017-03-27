@@ -11,6 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 440ef0a678975ba4cbb62d9aced23bb9, type: 3}
   m_Name: MTodoData
   m_EditorClassIdentifier: 
+  estado: 1
   Tickets: []
   Categorias:
   - TODO
@@ -18,4 +19,4 @@ MonoBehaviour:
   AutoEscaneoMTodo: 0
   RutaDataMTodo: Assets/Moon Antonio/MTodo/Data/MTodoData.asset
   versionActual: 1.5.2
-  versionTop: 
+  versionTop: 1.5.2

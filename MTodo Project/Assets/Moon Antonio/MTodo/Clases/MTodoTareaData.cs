@@ -30,7 +30,7 @@ namespace MoonAntonio.MTodo
         /// <summary>
         /// <para>Categorias de las tareas de MTodo</para>
         /// </summary>
-        public List<string> Categorias = new List<string>(){ "Default", "Urgente" };            // Categorias de las tareas de MTodo
+        public List<clsMTodoTareaCategoria> Categorias = new List<clsMTodoTareaCategoria>();// Categorias de las tareas de MTodo
         /// <summary>
         /// <para>Ruta de data</para>
         /// </summary>
@@ -55,16 +55,6 @@ namespace MoonAntonio.MTodo
 		}
 
 		/// <summary>
-		/// <para>Obtiene el conteo de las categorias</para>
-		/// </summary>
-		/// <param name="cat">Categoria</param>
-		/// <returns></returns>
-		public int GetCountDeCategorias(int cat)// Obtiene el conteo de las categorias
-		{
-			return cat != -1 ? Tareas.Count(e => e.Categoria == Categorias[cat]) : TareasCount;
-		}
-
-		/// <summary>
 		/// <para>Obtiene la tarea deseada.</para>
 		/// </summary>
 		/// <param name="index">ID de la tarea</param>
@@ -80,14 +70,7 @@ namespace MoonAntonio.MTodo
 		/// <param name="cat">Nombre de la categoria.</param>
 		public void AddCategoria(string cat)// Agrega una categoria nueva
 		{
-			// Si categorias contiene la categoria dad o si esta vacio volvemos
-			if (Categorias.Contains(cat) || string.IsNullOrEmpty(cat))
-			{
-				return;
-			}
-
-			// Sino agregamos la nueva categoria
-			Categorias.Add(cat);
+			// TODO Funcionalidad Add Categoria
 		}
 
 		/// <summary>

@@ -8,8 +8,8 @@
 //******************************************************************************\\
 
 #region Librerias
-using UnityEngine;
 using System;
+using System.Collections.Generic;
 #endregion
 
 namespace MoonAntonio.MTodo
@@ -20,55 +20,89 @@ namespace MoonAntonio.MTodo
 	[System.Serializable]
 	public class clsMTodoTareas
 	{
-		#region Variables
+		#region Variables Publicas
 		/// <summary>
-		/// <para>Titulo de la tarea.</para>
+		/// <para>Fecha de inicio de la tarea.</para>
 		/// </summary>
-		public string Titulo = string.Empty;								// Titulo de la tarea
+		public DateTime fechaInicio;								// Fecha de inicio de la tarea
 		/// <summary>
-		/// <para>Esta la tarea completada.</para>
+		/// <para>Fecha de fin de la tarea.</para>
 		/// </summary>
-		public bool Completado = false;										// Esta la tarea completada
+		public DateTime fechaFin;									// Fecha de fin de la tarea
+		/// <summary>
+		/// <para>Nombre de la tarea.</para>
+		/// </summary>
+		public string nombre;										// Nombre de la tarea
 		/// <summary>
 		/// <para>Descripcion de la tarea.</para>
 		/// </summary>
-		public string Descripcion = string.Empty;							// Descripcion de la tarea.
+		public string descripcion;									// Descripcion de la tarea
 		/// <summary>
-		/// <para>Fecha actual.</para>
+		/// <para>Estado de la tarea.</para>
 		/// </summary>
-		public string Fecha = string.Empty;									// Fecha actual
-		/// <summary>
-		/// <para>Categoria de la tarea.</para>
-		/// </summary>
-		public string Categoria = string.Empty;								// Categoria de la tarea
+		public Estado estadoActual;                                 // Estado de la tarea
 		#endregion
 
-		#region Constructor
+		#region Constructores
 		/// <summary>
-		/// <para>MTodo Tareas.</para>
+		/// <para>Inicializa una nueva instancia de la clase <see cref="clsMTodoTareas"/>.</para>
 		/// </summary>
-		/// <param name="titulo">Titulo de la tarea.</param>
-		/// <param name="completado">La tarea esta completada.</param>
-		/// <param name="descripcion">Descripcion de la tarea</param>
-		/// <param name="categoria">Categoria de la tarea.</param>
-		public clsMTodoTareas(string titulo, bool completado, string descripcion, string categoria)// MTodo Tareas
+		/// <param name="nuevoNombre">El nombre de la tarea.</param>
+		/// <param name="nuevaDesc">La descripcion de la tarea.</param>
+		public clsMTodoTareas(string nuevoNombre, string nuevaDesc)// Inicializa una nueva instancia de la clase <see cref="clsMTodoTareas"/>
 		{
-			Titulo = titulo;
-			Completado = completado;
-			Descripcion = descripcion;
-			Fecha = GetFecha();
-			Categoria = categoria;
+			this.nombre = nuevoNombre;
+			this.descripcion = nuevaDesc;
+			this.fechaInicio = DateTime.Now;
+			this.estadoActual = Estado.Abierta;
+		}
+
+		/// <summary>
+		/// <para>Inicializa una nueva instancia de la clase <see cref="clsMTodoTareas"/>.</para>
+		/// </summary>
+		/// <param name="nuevoNombre">El nombre de la tarea.</param>
+		public clsMTodoTareas(string nuevoNombre)// Inicializa una nueva instancia de la clase <see cref="clsMTodoTareas"/>
+		{
+			this.nombre = nuevoNombre;
+			this.descripcion = "Escribe la tarea";
+			this.fechaInicio = DateTime.Now;
+			this.estadoActual = Estado.Abierta;
+		}
+
+		/// <summary>
+		/// <para>Inicializa una nueva instancia de la clase <see cref="clsMTodoTareas"/>.</para>
+		/// </summary>
+		public clsMTodoTareas()// Inicializa una nueva instancia de la clase <see cref="clsMTodoTareas"/>
+		{
+			this.nombre = "Nueva Tarea";
+			this.descripcion = "Escribe la tarea";
+			this.fechaInicio = DateTime.Now;
+			this.estadoActual = Estado.Abierta;
 		}
 		#endregion
 
 		#region Metodos
 		/// <summary>
-		/// <para>Obtiene la fecha actual.</para>
+		/// <para>Cerrar la tarea.</para>
 		/// </summary>
-		/// <returns>Fecha actual.</returns>
-		public string GetFecha()// Obtiene la fecha actual
+		public void Completado()// Cerrar la tarea
 		{
-			return DateTime.Now.ToString();
+			if (this.estadoActual == Estado.Abierta)
+			{
+				this.estadoActual = Estado.Cerrada;
+				this.fechaFin = DateTime.Now;
+			}
+		}
+		#endregion
+
+		#region Enum
+		/// <summary>
+		/// <para>Estado de la tarea.</para>
+		/// </summary>
+		public enum Estado
+		{
+			Abierta,
+			Cerrada
 		}
 		#endregion
 	}

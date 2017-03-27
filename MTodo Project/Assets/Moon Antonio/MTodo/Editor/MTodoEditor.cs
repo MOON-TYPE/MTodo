@@ -130,30 +130,9 @@ namespace MoonAntonio.MTodo
 		/// </summary>
 		private clsMTodoTareas[] tareasMostradas;                                       // Tareas que seran mostrados
 		/// <summary>
-		/// <para>Categoria actual a mostrar de tareas</para>
-		/// </summary>
-		private int catTareaActual = -1;                                                // Categoria actual a mostrar de tareas
-		/// <summary>
-		/// <para>Categorias de Tareas</para>
-		/// </summary>
-		private string[] CategoriasTareas                                               // Categorias de Tareas
-		{
-			get
-			{
-				if (dataTarea != null && dataTarea.Categorias.Count > 0)
-					return dataTarea.Categorias.ToArray();
-				else
-					return new string[] { "Default", "Urgente" };
-			}
-		}
-		/// <summary>
 		/// <para>Nombre de la nueva categoria</para>
 		/// </summary>
 		private string nuevaCategoriaTarea = "";                                        // Nombre de la nueva categoria
-
-		private string nuevoTitulo = "";
-
-		private string nuevaDescripcion = "";
 		#endregion
 		#endregion
 
@@ -330,7 +309,7 @@ namespace MoonAntonio.MTodo
 					}
 					else
 					{
-						EditorGUILayout.Slider(dataTarea.GetCountDeCategorias(catTareaActual), 0, dataTarea.Tareas.Count);
+						// TODO Mostrar tareas en total
 					}
 
 					GUI.backgroundColor = Color.white;
@@ -397,30 +376,9 @@ namespace MoonAntonio.MTodo
 		{
 			using (new MTodoExtensiones.VerticalBlock(GUI.skin.box, GUILayout.ExpandWidth(true), GUILayout.ExpandHeight(true)))
 			{
-				EditorGUILayout.BeginHorizontal();
-
-				nuevoTitulo = EditorGUILayout.TextField("Titulo: ",nuevoTitulo);
-				nuevaDescripcion = EditorGUILayout.TextArea(nuevaDescripcion);
-				nuevaCategoriaTarea = EditorGUILayout.TextField("Categoria: ",nuevaCategoriaTarea);
-				if (GUILayout.Button("+"))
-				{
-					dataTarea.Tareas.Add(new clsMTodoTareas(nuevoTitulo, false, nuevaDescripcion, nuevaCategoriaTarea));
-				}
-
-				EditorGUILayout.EndHorizontal();
-
 				using (new MTodoExtensiones.ScrollviewBlock(ref mainAreaScroll))
 				{
-					EditorGUILayout.BeginVertical();
-					for (var i = 0; i < tareasMostradas.Length; i++)
-					{
-						if (tareasMostradas[i].Completado == false)
-						{
-							EditorGUILayout.LabelField(tareasMostradas[i].Titulo);
-						}
-						
-					}
-					EditorGUILayout.EndVertical();
+					CampoTarea();
 				}
 			}
 		}
@@ -480,17 +438,6 @@ namespace MoonAntonio.MTodo
                 ticketsMostrados = temp.Where(e => e.Texto.Contains(buscaString)).ToArray();
             }
         }
-
-		/// <summary>
-		/// <para>Refresca los Tareas que se muestran</para>
-		/// </summary>
-		private void RefrescaTareasAMostrar()// Refresca los Tareas que se muestran
-		{
-			if (catTareaActual == -1)
-				tareasMostradas = dataTarea.Tareas.ToArray();
-			else if (catTareaActual >= 0)
-				tareasMostradas = dataTarea.Tareas.Where(e => e.Categoria == dataTarea.Categorias[catTareaActual]).ToArray();
-		}
 
 		/// <summary>
 		/// <para>Escanea un archivo</para>
@@ -638,29 +585,7 @@ namespace MoonAntonio.MTodo
 		/// <param name="index">ID de la categoria</param>
 		private void CategoriaCampoTarea(int index)// Busca en el campo de las categorias
 		{
-			Event e = Event.current;
-			var cat = index == -1 ? "Todas las Categorias" : dataTarea.Categorias[index];
-			using (new MTodoExtensiones.HorizontalBlock(EditorStyles.helpBox))
-			{
-				using (new MTodoExtensiones.ColoredBlock(index == catTareaActual ? Color.green : Color.white))
-				{
-					GUILayout.Label("#" + cat);
-					GUILayout.FlexibleSpace();
-					GUILayout.Label("(" + dataTarea.GetCountDeCategorias(index) + ")");
-				}
-				if (index != -1 && index != 0 && index != 1)
-				{
-					if (GUILayout.Button("x", EditorStyles.miniButton))
-						EditorApplication.delayCall += () =>
-						{
-							dataTarea.RemoveCategoria(index);
-							Repaint();
-						};
-				}
-			}
-			var rect = GUILayoutUtility.GetLastRect();
-			if (e.isMouse && e.type == EventType.MouseDown && rect.Contains(e.mousePosition))
-				SetCatActualTarea(index);
+			// TODO Campo de las categorias
 		}
 
 		/// <summary>
@@ -722,20 +647,6 @@ namespace MoonAntonio.MTodo
         }
 
 		/// <summary>
-		/// <para>Fija la categoria actual</para>
-		/// </summary>
-		/// <param name="index">ID Categoria</param>
-		private void SetCatActualTarea(int index)// Fija la categoria actual
-		{
-			EditorApplication.delayCall += () =>
-			{
-				catTareaActual = index;
-				RefrescaTareasAMostrar();
-				Repaint();
-			};
-		}
-
-		/// <summary>
 		/// <para>Click Derecho con el mouse</para>
 		/// </summary>
 		private void ClickMouseDerecho()// Click Derecho con el mouse
@@ -777,6 +688,11 @@ namespace MoonAntonio.MTodo
 					break;
 			}
         }
+
+		private void CampoTarea()
+		{
+			// TODO GUI de las tareas
+		}
 
 		/// <summary>
 		/// <para>Comprueba la version actual y la version mas alta de MTodo.</para>
