@@ -37,7 +37,7 @@ Despues solo tienes que ir, dandole click en el mensaje, y se te abrira tu IDE p
 - [x] Windows preference
 - [x] Comprobacion de Update
 - [x] Autocreacion data
-- [ ] Tareas
+- [x] Tareas
 - [ ] AutoUpdate
 - [ ] Kanban
 
