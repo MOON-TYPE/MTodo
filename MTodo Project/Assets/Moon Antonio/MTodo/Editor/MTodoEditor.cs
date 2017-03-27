@@ -117,12 +117,35 @@ namespace MoonAntonio.MTodo
 		#endregion
 
 		#region MTarea
-		// TODO Inicializar las variables necesarias
-		// Data
-		// Ruta
-		// Tareas
-		// Categoria Actual
-		// Categoria
+		/// <summary>
+        /// <para>Data de MTodoTarea</para>
+        /// </summary>
+        private MTodoTareaData dataTarea;                                                // Data de MTodoTarea
+		/// <summary>
+		/// <para>Ruta de MTodoTarea</para>
+		/// </summary>
+		private string rutaDataTarea = @"Assets/Moon Antonio/MTodo/Data/MTareaData.asset";// Ruta de MTodoTarea
+		/// <summary>
+		/// <para>Tareas que seran mostrados</para>
+		/// </summary>
+		private clsMTodoTareas[] tareasMostrados;                                       // Tareas que seran mostrados
+		/// <summary>
+		/// <para>Categoria actual a mostrar de tareas</para>
+		/// </summary>
+		private int catTareaActual = -1;                                                // Categoria actual a mostrar de tareas
+		/// <summary>
+		/// <para>Categorias de Tareas</para>
+		/// </summary>
+		private string[] CategoriasTareas                                               // Categorias de Tareas
+		{
+			get
+			{
+				if (dataTarea != null && dataTarea.Categorias.Count > 0)
+					return dataTarea.Categorias.ToArray();
+				else
+					return new string[] { "Default", "Urgente" };
+			}
+		}
 		#endregion
 		#endregion
 
@@ -152,12 +175,14 @@ namespace MoonAntonio.MTodo
 
 			// Obtener datapath
 			rutaData = MTodoWindows.dataPath;
+			rutaDataTarea = MTodoWindows.dataPathTarea;
 
             // Refrescar archivos
             RefrescarArchivos();
 
             // Cargar data
             data = MTodoExtensiones.CrearDataPersistente<MTodoData>(rutaData);
+			dataTarea = MTodoExtensiones.CrearDataPersistente<MTodoTareaData>(rutaDataTarea);
 
 			// Si la ruta esta vacia, asignarle una
 			if (data.RutaDataMTodo == string.Empty || data.RutaDataMTodo == null)
@@ -165,9 +190,14 @@ namespace MoonAntonio.MTodo
 				data.RutaDataMTodo = rutaData;
 				MTodoWindows.dataPath = rutaData;
 			}
+			if (dataTarea.RutaDataMTodoTareas == string.Empty || dataTarea.RutaDataMTodoTareas == null)
+			{
+				dataTarea.RutaDataMTodoTareas = rutaDataTarea;
+				MTodoWindows.dataPathTarea = rutaDataTarea;
+			}
 
-            // Refrescar Data
-            RefrescarData();
+			// Refrescar Data
+			RefrescarData();
 
             // Activar observador
             observador = new FileSystemWatcher(Application.dataPath, "*.cs");
@@ -198,13 +228,19 @@ namespace MoonAntonio.MTodo
         {
             if(data == null)
             {
-                GUILayout.Label("No se ha cargado la Data", EditorStyles.centeredGreyMiniLabel);
+                GUILayout.Label("No se ha cargado la Data.", EditorStyles.centeredGreyMiniLabel);
                 return;
             }
 
-            Undo.RecordObject(data, "tododata");
+			if (dataTarea == null)
+			{
+				GUILayout.Label("No se ha cargado la Data de tareas.", EditorStyles.centeredGreyMiniLabel);
+				return;
+			}
 
-            Toolbar();
+			Undo.RecordObject(data, "tododata");
+
+			Toolbar();
             using (new MTodoExtensiones.HorizontalBlock())
             {
                 Sidebar();
