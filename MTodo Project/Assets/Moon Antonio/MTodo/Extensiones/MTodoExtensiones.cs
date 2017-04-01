@@ -9,7 +9,9 @@
 
 #region Librerias
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using System;
 using System.IO;
 #endregion
@@ -21,14 +23,15 @@ namespace MoonAntonio.MTodo.Extensiones
     /// </summary>
 	public static class MTodoExtensiones
 	{
-        #region Scriptable
-        /// <summary>
-        /// <para>Crea la Data de MTodo</para>
-        /// </summary>
-        /// <typeparam name="T">T</typeparam>
-        /// <param name="ruta">Ruta de la Data</param>
-        /// <returns>La data creada</returns>
-        public static T CrearData<T>(string ruta) where T : ScriptableObject
+#if UNITY_EDITOR
+		#region Scriptable
+		/// <summary>
+		/// <para>Crea la Data de MTodo</para>
+		/// </summary>
+		/// <typeparam name="T">T</typeparam>
+		/// <param name="ruta">Ruta de la Data</param>
+		/// <returns>La data creada</returns>
+		public static T CrearData<T>(string ruta) where T : ScriptableObject
         {
             var temp = ScriptableObject.CreateInstance<T>();
 
@@ -127,7 +130,6 @@ namespace MoonAntonio.MTodo.Extensiones
         }
         #endregion
 
-#if UNITY_EDITOR
         #region Layout
         public class VerticalBlock : IDisposable
         {

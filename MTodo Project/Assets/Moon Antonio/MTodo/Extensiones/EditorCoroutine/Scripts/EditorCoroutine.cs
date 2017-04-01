@@ -1,13 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using System.Collections.Generic;
 using System;
 using System.Reflection;
 
 public class EditorCoroutine{
 
-    class Coroutine {
+#if UNITY_EDITOR
+	class Coroutine {
         public ICoroutineYield CurrentYield = new YieldDefault();
         public IEnumerator Routine;
         public string RoutineUniqueHash;
@@ -310,4 +313,6 @@ public class EditorCoroutine{
             Console.WriteLine(m);
         }
     }
+#endif
+
 }

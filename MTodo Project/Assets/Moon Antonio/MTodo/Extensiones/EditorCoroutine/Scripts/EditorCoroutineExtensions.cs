@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 public static class EditorCoroutineExtensions {
-
-    #region EditorWindow
-    public static void StartCoroutine(this EditorWindow thisRef, IEnumerator coroutine) {
+#if UNITY_EDITOR
+	#region EditorWindow
+	public static void StartCoroutine(this EditorWindow thisRef, IEnumerator coroutine) {
         EditorCoroutine.StartCoroutine(coroutine, thisRef);
     }
 
@@ -28,7 +30,7 @@ public static class EditorCoroutineExtensions {
     public static void StopAllCoroutines(this EditorWindow thisRef) {
         EditorCoroutine.StopAllCoroutines(thisRef);
     }
-    #endregion
-
+	#endregion
+#endif
 
 }
