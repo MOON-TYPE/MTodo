@@ -1,6 +1,6 @@
 [![GitHub issues](https://img.shields.io/github/issues/MOON-TYPE/MTodo.svg)](https://github.com/MOON-TYPE/MTodo/issues)
 [![UnityVersion](https://img.shields.io/badge/Unity-5.5.2p4-orange.svg)](https://unity3d.com/es)
-[![Build Status](https://img.shields.io/badge/Trello-Active-brightgreen.svg)](https://trello.com/b/ZPmPLDJ8)
+[![Build Status](https://img.shields.io/badge/Trello-Active-brightgreen.svg)](https://trello.com/b/sy3fZdsd)
 [![Slack Status](https://moonantonio.herokuapp.com/badge.svg)](https://moonantonio.herokuapp.com/)
 [![GitHub license](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://raw.githubusercontent.com/MOON-TYPE/MTodo/master/LICENSE)
 
