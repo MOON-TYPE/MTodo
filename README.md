@@ -38,7 +38,7 @@ Despues solo tienes que ir, dandole click en el mensaje, y se te abrira tu IDE p
 - [x] Comprobacion de Update
 - [x] Autocreacion data
 - [x] Tareas
-- [ ] AutoUpdate
+- [ ] AutoUpdate - En PROGRESO
 - [ ] Kanban
 
 [Releases][1]
