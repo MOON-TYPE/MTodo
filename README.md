@@ -9,7 +9,7 @@ Herramienta sencilla para hacer un seguimiento del codigo en Unity3D con diferen
 .
 ---
 
-> Unity3D 5.5+
+> Unity3D 4.6/5.5+
 
 > VS 2015/7
 
