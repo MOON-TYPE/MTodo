@@ -48,6 +48,10 @@ Despues solo tienes que ir, dandole click en el mensaje, y se te abrira tu IDE p
 
 [Releases][1]
 
+### Problemas
+
+Con la llegada de Unity 5.6 han cambiado algunas cosas sobre los assets, por lo que la parte de tareas esta inactiva hasta nuevo aviso.
+
 ### Licencias & Atribuciones
 ---
 EditorCoroutine => Marijn Zwemmer
