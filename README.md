@@ -5,7 +5,7 @@
 [![GitHub license](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://raw.githubusercontent.com/MOON-TYPE/MTodo/master/LICENSE)
 
 # MTodo
-Herramienta sencilla para hacer un seguimiento del codigo en Unity3D con diferentes categorias
+Herramienta sencilla para hacer un seguimiento del codigo en Unity3D con diferentes categorias (RE-Construyendo)
 .
 ---
 
