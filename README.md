@@ -1,7 +1,6 @@
 [![GitHub issues](https://img.shields.io/github/issues/MOON-TYPE/MTodo.svg)](https://github.com/MOON-TYPE/MTodo/issues)
-[![UnityVersion](https://img.shields.io/badge/Unity-5.5.2p4-orange.svg)](https://unity3d.com/es)
+[![UnityVersion](https://img.shields.io/badge/Unity-2017.3.1f1-blue.svg)](https://unity3d.com/es)
 [![Build Status](https://img.shields.io/badge/Trello-Active-brightgreen.svg)](https://trello.com/b/sy3fZdsd)
-[![Slack Status](https://moonantonio.herokuapp.com/badge.svg)](https://moonantonio.herokuapp.com/)
 [![GitHub license](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://raw.githubusercontent.com/MOON-TYPE/MTodo/master/LICENSE)
 
 # MTodo
@@ -9,7 +8,7 @@ Herramienta sencilla para hacer un seguimiento del codigo en Unity3D con diferen
 .
 ---
 
-> Unity3D 4.6/5.5+
+> Unity3D 2017.3.1f1
 
 > VS 2015/7
 
